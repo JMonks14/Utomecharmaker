@@ -1,0 +1,10 @@
+CREATE TABLE Skills (
+skill_id int PRIMARY KEY AUTO_INCREMENT,
+skill_name varchar(50) NOT NULL,
+description varchar(200) NOT NULL,
+prerequisite_1 int,
+prerequisite_2 int,
+UNIQUE(skill_name),
+FOREIGN KEY (prerequisite_1) REFERENCES Skills (skill_id),
+FOREIGN KEY (prerequisite_2) REFERENCES Skills (skill_id)
+)
