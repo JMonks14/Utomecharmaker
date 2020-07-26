@@ -1,0 +1,5 @@
+CREATE TABLE skill_trees (
+tree_id int PRIMARY KEY AUTO_INCREMENT,
+tree_name varchar(15),
+UNIQUE(tree_name)
+);

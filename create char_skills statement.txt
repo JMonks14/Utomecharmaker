@@ -1,0 +1,6 @@
+CREATE TABLE char_skills (
+fk_char_id int,
+fk_skill_id int,
+FOREIGN KEY (fk_char_id) REFERENCES characters (char_id),
+FOREIGN KEY (fk_skill_id) REFERENCES skills (skill_id)
+);

@@ -1,0 +1,13 @@
+CREATE TABLE characters (
+char_id int PRIMARY KEY AUTO_INCREMENT,
+char_name varchar (40) NOT NULL,
+char_background varchar(300),
+fk_player_id int NOT NULL,
+HP tinyint default 3,
+MP tinyint default 3,
+AP_basic tinyint default 1,
+AP_light tinyint default 4,
+AP_heavy tinyint default 8,
+XP_spent tinyint default 0,
+alive bit(1) DEFAULT 1
+);

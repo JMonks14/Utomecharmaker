@@ -1,0 +1,6 @@
+CREATE TABLE headrefs (
+parameter varchar(30),
+value tinyint
+);
+
+INSERT INTO headrefs(parameter, value) VALUES (max_XP, 14);
