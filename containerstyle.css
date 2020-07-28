@@ -1,0 +1,7 @@
+.container {
+    flex-wrap: wrap;
+}
+
+.form-group {
+    max-width: 360px;
+}
