@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="viewcharstyle.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>U Tome View Character</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">An Unfinished Tome</a>
+        <a class="navbar-brand" href="index.html">The Unfinished Tome</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,6 +25,45 @@
           </ul>
         </div>
       </nav>
+      <br><br>
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h6>Character Name:</h6>
+            <br>
+            <h6>Background:</h6>
+            <p id="charbackground"></p>
+            <br>
+            <h6>HP:</h6>
+            <br>
+            <h6>XP availiable:</h6>
+            <br>
+            <button id="buyskillbutton" type="button" class="btn btn-primary">Buy a Skill</button>  <button id="resetXPbutton" type="button" class="btn btn-primary">Reset Skills</button>
+            <br><br>
+            <button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character</button>
+          </div>
+          <div class="col">
+             <h5>Character Skills</h5><br>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Skill Name</th>
+                  <th scope="col">Times Bought</th>
+                  <th scope="col">Description</th>
+                </tr>
+              </thead>
+              <tbody id="skilltable">
+                <tr>
+                  <th scope="row" class="tabletxt">1</th>
+                  <td class="tabletxt">Mark</td>
+                  <td class="tabletxt">Ottovghbjvbnk sbhwrjbgehrjgbuer hgbehjgbuehbgebrguebgehbrg ebghbguebwgubu3r dhgv</td>
+              </tbody>
+              </table>
+          </div>
+        </div>
+
+      
 
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
