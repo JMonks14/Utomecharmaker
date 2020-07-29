@@ -8,6 +8,7 @@ MP tinyint default 3,
 AP_basic tinyint default 1,
 AP_light tinyint default 4,
 AP_heavy tinyint default 8,
+AP_magic tinyint default 2,
 XP_spent tinyint default 0,
 alive bit(1) DEFAULT 1
 );

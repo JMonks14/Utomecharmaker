@@ -1,0 +1,9 @@
+CREATE TABLE spells (
+spell_id int PRIMARY KEY AUTO_INCREMENT,
+spell_name varchar(30),
+prerequisite int,
+mana_cost tinyint,
+type varchar(10),
+description varchar(700),
+FOREIGN KEY (prerequisite) references spells (spell_id)
+);
