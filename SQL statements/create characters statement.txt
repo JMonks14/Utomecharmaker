@@ -10,5 +10,6 @@ AP_light tinyint default 4,
 AP_heavy tinyint default 8,
 AP_magic tinyint default 2,
 XP_spent tinyint default 0,
-alive bit(1) DEFAULT 1
+alive bit(1) DEFAULT 1,
+FOREIGN KEY (fk_player_id) REFERENCES players(player_id)
 );

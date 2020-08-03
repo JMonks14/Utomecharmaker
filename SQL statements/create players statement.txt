@@ -4,6 +4,7 @@ first_name varchar(30),
 last_name varchar(30),
 username varchar(30),
 password varchar(30),
-fk_activechar_id int,
-FOREIGN KEY (fk_activechar_id) REFERENCES characters (char_id)
+fk_activechar_id int
 );
+
+ALTER TABLE players ADD FOREIGN KEY (fk_activechar_id) REFERENCES characters (char_id);

@@ -1,12 +1,27 @@
 CREATE TABLE skills (
 skill_id int PRIMARY KEY AUTO_INCREMENT,
 skill_name varchar(50) NOT NULL,
-description varchar(200) NOT NULL,
+description varchar(400) NOT NULL,
 fk_tree_id int NOT NULL,
 prerequisite_1 int,
 prerequisite_2 int,
+prerequisite_3 int,
+prerequisite_4 int,
+prerequisite_5 int,
 UNIQUE(skill_name),
 FOREIGN KEY (prerequisite_1) REFERENCES skills (skill_id),
 FOREIGN KEY (prerequisite_2) REFERENCES skills (skill_id),
+FOREIGN KEY (prerequisite_3) REFERENCES skills (skill_id),
+FOREIGN KEY (prerequisite_4) REFERENCES skills (skill_id),
+FOREIGN KEY (prerequisite_5) REFERENCES skills (skill_id),
 FOREIGN KEY (fk_tree_id) REFERENCES skill_trees (tree_id)
 );
+
+INSERT INTO skills (skill_name, description, fk_tree_id, prerequisite_1, prerequisite_2) Values ();
+
+INSERT INTO skills (skill_name, description, fk_tree_id, prerequisite_1) Values ();
+
+
+INSERT INTO skills (skill_name, description, fk_tree_id) Values ();
+
+INSERT INTO skills (skill_name, description, fk_tree_id, prerequisite_1, prerequisite_2, prerequisite_3, prerequisite_4, prerequisite_5) Values ();

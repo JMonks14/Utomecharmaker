@@ -7,3 +7,7 @@ type varchar(10),
 description varchar(700),
 FOREIGN KEY (prerequisite) references spells (spell_id)
 );
+
+INSERT INTO spells (spell_name, prerequisite, mana_cost, type, description) VALUES (
+
+INSERT INTO spells (spell_name, mana_cost, type, description) VALUES (
