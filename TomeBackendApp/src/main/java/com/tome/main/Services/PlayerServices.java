@@ -2,12 +2,17 @@ package com.tome.main.Services;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tome.main.Enitities.Player;
 import com.tome.main.Exceptions.PlayerNotFoundException;
 import com.tome.main.Repos.PlayerRepo;
 
+@Service
 public class PlayerServices {
-	
+
+	@Autowired
 	PlayerRepo repo;
 	
 	public PlayerServices(PlayerRepo repo) {
