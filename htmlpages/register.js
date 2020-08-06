@@ -23,19 +23,19 @@ document.querySelector("#playerreg").addEventListener("submit",function(e) {
     let first_name = x["firstnameregister"].value;
     let last_name = x["lastnameregister"].value;
     let username = x["usernameregister"].value;
-    let password1= x["Passwordregister"].value;
+    let password= x["Passwordregister"].value;
     let password2= x["confirmPasswordregister"].value;
 
-    if (password1 != password2) {
+    if (first_name==="" || last_name==="" || username==="" || password==="") {
+        window.alert("Registration failed: All fields must contain characters")} 
+    else if (password != password2) {
         window.alert("Registration failed: passwords must match")
-    } else if (first_name==="" || last_name==="" || username==="" || password1==="") {
-        window.alert("Registration failed: All fields must contain characters")
     } else {
         const data = {
             "first_name": first_name,
             "last_name": last_name,
             "username": username,
-            "password1": password1
+            "password": password
         }
         playerReg(data)
         window.location.href="Account.html"
