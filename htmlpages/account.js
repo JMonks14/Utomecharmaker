@@ -51,6 +51,7 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
     
     document.getElementById("nameformspace").innerHTML+=nameform;
     
+    //sends new info when submitted
     document.querySelector("#nameupdate").addEventListener("submit", function(e) {
         e.preventDefault();
         let n = document.querySelector("#nameupdate").elements;
@@ -70,7 +71,7 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
     })
     
 })
-
+//function which sends update info
 function playernameUp(data) {
 
     fetch(`http://localhost:8010/player/update/${data.player_id}`, {
@@ -87,7 +88,7 @@ function playernameUp(data) {
         console.log("Request failed", error);
     })
 }
-
+//brings up username update form when clicked
 document.querySelector("#updateusernamebutton").addEventListener("click", function(upName) {
     upName.preventDefault();
     document.getElementById("updateusernamebutton").remove();
@@ -116,3 +117,54 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
         location.reload()
 
 })})
+
+//brings up name update form when button clicked
+document.querySelector("#changepasswordbutton").addEventListener("click", function(upName) {
+    upName.preventDefault();
+    document.getElementById("changepasswordbutton").remove();
+
+    let passform = `<form id="passwordupdate">
+    <div class="form-group">
+      <label for="oldpassword">Enter Current Password:</label>
+      <input type="password" class="form-control" id="oldpassword">
+    </div>
+    <div class="form-group">
+      <label for="newpassord">New Password:</label>
+      <input type="password" class="form-control" id="newpassword">
+    </div>
+    <div class="form-group">
+      <label for="newpassordcon">Confirm New Password:</label>
+      <input type="password" class="form-control" id="newpasswordcon">
+    </div>
+    <button id="subnamebutton" type="submit" class="btn btn-primary">Submit</button>
+    </form>`
+    
+    document.getElementById("passformspace").innerHTML+=passform;
+    
+    //sends new info when submitted
+    document.querySelector("#passwordupdate").addEventListener("submit", function(e) {
+        e.preventDefault();
+        let p = document.querySelector("#passwordupdate").elements;
+
+        let oldpass = p["oldpassword"].value;
+        let newpass = p["newpassword"].value;
+        let newpasscon = p["newpasswordcon"].value;
+
+        if (oldpass != player.password) {
+            window.alert("Update failed: Current password incorrect")
+        } else if (newpass != newpasscon) {
+            window.alert("Update failed: New passwords do not match")
+        } else if (newpass === "") {
+            window.alert("Update failed: New password must contain characters")
+        } else {
+            player.password = newpass
+            playernameUp(player)
+            window.alert("Password update successful.")
+            location.reload()
+        }
+
+       
+
+    })
+    
+})
