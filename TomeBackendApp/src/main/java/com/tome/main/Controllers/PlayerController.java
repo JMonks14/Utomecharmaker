@@ -33,6 +33,11 @@ public class PlayerController {
 		return this.service.viewById(id);
 	}
 	
+	@GetMapping("/viewlatest")
+	public Player viewLatest() {
+		return this.service.viewLatest();
+	}
+	
 	@PostMapping("/update/{id}")
 	public ResponseEntity<Player> update(@RequestBody Player newPlayer, @PathVariable int id) {
 		Player updated = this.service.update(newPlayer, id);

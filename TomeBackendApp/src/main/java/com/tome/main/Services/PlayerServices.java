@@ -29,6 +29,10 @@ public class PlayerServices {
 		Player found = this.repo.findById(id).orElseThrow(PlayerNotFoundException::new);
 		return found;
 	}
+	public Player viewLatest() {
+		Player latest = this.repo.findLatest();
+		return latest;
+	}
 	
 	public Player update(Player newPlayer, int id) {
 		try {
