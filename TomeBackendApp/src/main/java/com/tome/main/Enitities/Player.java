@@ -1,8 +1,12 @@
 package com.tome.main.Enitities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +20,14 @@ public class Player {
 	private String last_name;
 	private String username;
 	private String password;
+	private int activeChar;
+	
+	public int getActiveChar() {
+		return activeChar;
+	}
+	public void setActiveChar(int activeChar) {
+		this.activeChar = activeChar;
+	}
 	public int getPlayer_id() {
 		return player_id;
 	}
