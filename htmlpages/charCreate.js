@@ -16,6 +16,7 @@ document.querySelector("#charcreate").addEventListener("submit", function(a) {
         "fk_player_id": 3        
     }
     saveChar(newChar)
+    window.location.href="Account.html"
 })
 
 function saveChar(data) {
