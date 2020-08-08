@@ -12,7 +12,15 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                         let bg = data.char_background
                         document.getElementById("charbackground").innerHTML+=bg;
                         console.log(data);
-                        let hp = data.hp
-                        
-                        document.getElementById("hpspace").innerHTML+=hp
+                        let statstring = `HP: ${data.hp} <br>
+                        MP: ${data.mp} <br>
+                        Max AP (basic): ${data.ap_basic} <br>`
+                        if (data.ap_light > 0) {
+                            statstring += `Max AP (light): ${data.ap_light} <br>`
+                        }
+                        if (data.ap_heavy > 0) {
+                            statstring += `Max AP (heavy): ${data.ap_heavy} <br>`
+                        }
+
+                        document.getElementById("stats").innerHTML+=statstring
                  })})

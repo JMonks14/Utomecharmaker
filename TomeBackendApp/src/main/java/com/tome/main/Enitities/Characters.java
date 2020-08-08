@@ -1,5 +1,6 @@
 package com.tome.main.Enitities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,21 +23,21 @@ public class Characters {
 	private String char_background;
 	private int fk_player_id;
 	
-	@Transient
+	
 	private boolean alive;
-	@Transient
+	@Column(columnDefinition="tinyint default 3")
 	private int HP;
-	@Transient
+	@Column(columnDefinition="tinyint default 3")
 	private int MP;
-	@Transient
+	@Column(columnDefinition="tinyint default 1")
 	private int AP_basic;
-	@Transient
+	
 	private int AP_light;
-	@Transient
+	
 	private int AP_heavy;
-	@Transient
+	
 	private int AP_magic;
-	@Transient
+	
 	private int XP_spent;
 	
 	public int getChar_id() {
