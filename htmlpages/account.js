@@ -5,7 +5,7 @@ var player = {
 }
 
 //fetches user info and writed to page
-fetch("http://localhost:8010/player/view/8")
+fetch("http://localhost:8010/player/view/3")
 .then(
     function(response) {
         if (response.status!==200) {
@@ -47,12 +47,18 @@ fetch("http://localhost:8010/player/view/8")
                      }
                      response.json().then(function(data) {
                      name = data.char_name
+                     Cid = data.char_id
+                     sessionStorage.setItem("Cid", Cid)
+
             
                     console.log(name);            
                     document.getElementById("charnamespace").innerHTML+=name;
                     document.getElementById("charcbuttspace").innerHTML+=`<button id="viewcharbutton" type="button" class="btn btn-primary">View Character</button>`;
-                    document.getElementById("rcharbuttspace").innerHTML+=`<button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character</button>`;
-            
+                    // document.getElementById("rcharbuttspace").innerHTML+=`<button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character</button>`;
+                    document.querySelector("#viewcharbutton").addEventListener("click", function(a) {
+                        a.preventDefault()
+                        window.location.href="viewchar.html"
+                        })
                  })})}})})
 
 

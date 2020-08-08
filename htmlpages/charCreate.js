@@ -13,7 +13,11 @@ document.querySelector("#charcreate").addEventListener("submit", function(a) {
         "race": race,
         "origin": origin,
         "char_background": bg,
-        "fk_player_id": sessionStorage.getItem("Pid")        
+        "fk_player_id": sessionStorage.getItem("Pid"),
+        "alive": 1,
+        "hp": 3,
+        "mp": 3,
+        "ap_basic": 1         
     }
     if (name==="") {
         window.alert("Character name cannot be blank")
