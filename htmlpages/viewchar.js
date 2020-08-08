@@ -23,4 +23,16 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                         }
 
                         document.getElementById("stats").innerHTML+=statstring
+
+                        fetch("http://localhost:8010/headrefs/getmaxXP")
+                        .then(function(response) {
+                            if (response.status!==200) {
+                            console.log("There was a problem, status code " + response.status);
+                            return;
+                            }
+                            response.json().then(function(maxxp) {
+                                console.log(maxxp);
+                                document.getElementById("xppara").innerHTML+=maxxp-data.xp_spent
+                            }
+                     )})
                  })})
