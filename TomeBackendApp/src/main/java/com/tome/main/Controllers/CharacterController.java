@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tome.main.Enitities.Characters;
+import com.tome.main.Enitities.Player;
 import com.tome.main.Services.CharacterServices;
 
 @RestController
@@ -24,6 +27,11 @@ public class CharacterController {
 	public ResponseEntity<Characters> createChar(@RequestBody Characters Char) {
 		Characters newChar = this.service.create(Char);
 		return new ResponseEntity<>(newChar, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/view/{id}")
+	public Characters view(@PathVariable int id) { 
+		return this.service.viewById(id);
 	}
 
 }

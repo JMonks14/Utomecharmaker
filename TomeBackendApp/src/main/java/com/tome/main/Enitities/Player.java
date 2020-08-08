@@ -20,13 +20,13 @@ public class Player {
 	private String last_name;
 	private String username;
 	private String password;
-	private int activeChar;
+	private int activechar_id;
 	
 	public int getActiveChar() {
-		return activeChar;
+		return activechar_id;
 	}
-	public void setActiveChar(int activeChar) {
-		this.activeChar = activeChar;
+	public void setActiveChar(int fk_activeChar_id) {
+		this.activechar_id = fk_activeChar_id;
 	}
 	public int getPlayer_id() {
 		return player_id;

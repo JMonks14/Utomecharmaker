@@ -13,10 +13,15 @@ document.querySelector("#charcreate").addEventListener("submit", function(a) {
         "race": race,
         "origin": origin,
         "char_background": bg,
-        "fk_player_id": 3        
+        "fk_player_id": sessionStorage.getItem("Pid")        
     }
-    saveChar(newChar)
-    window.location.href="Account.html"
+    if (name==="") {
+        window.alert("Character name cannot be blank")
+    } else {
+        saveChar(newChar)
+        window.location.href="Account.html"
+    }
+    
 })
 
 function saveChar(data) {

@@ -1,10 +1,11 @@
 let id =""
 let name =""
 let username=""
-let player = {}
+var player = {
+}
 
-//fetches latest user info and writed to page
-fetch("http://localhost:8010/player/viewlatest")
+//fetches user info and writed to page
+fetch("http://localhost:8010/player/view/8")
 .then(
     function(response) {
         if (response.status!==200) {
@@ -15,6 +16,7 @@ fetch("http://localhost:8010/player/viewlatest")
             id = data.player_id
             name = data.first_name + " " + data.last_name
             username = data.username
+            sessionStorage.setItem("Pid", id)
 
             console.log(id);
             console.log(name);
@@ -23,13 +25,36 @@ fetch("http://localhost:8010/player/viewlatest")
             document.getElementById("idpara").innerHTML+=id;
             document.getElementById("namepara").innerHTML+=name;
             document.getElementById("usernamepara").innerHTML+=username;
-            player = data;
             // console.log("====================");
             // console.log(player);
             // console.log("====================");
-        })
-    }
-)
+            //brings up character name or create character button if none exists
+            if (data.activeChar===0) {
+                document.getElementById("charnamespace").innerHTML+="You do not have an active character at present.";
+            document.getElementById("charcbuttspace").innerHTML+=`<button id="createcharbutton" type="button" class="btn btn-primary">Create Character</button>`;
+            document.querySelector("#createcharbutton").addEventListener("click", function(a) {
+            a.preventDefault()
+            window.location.href="Createchar.html"
+            })
+            } else {
+    
+            fetch(`http://localhost:8010/character/view/${data.activeChar}`)
+               .then(
+                     function(response) {
+                     if (response.status!==200) {
+                     console.log("There was a problem, status code " + response.status);
+                     return;
+                     }
+                     response.json().then(function(data) {
+                     name = data.char_name
+            
+                    console.log(name);            
+                    document.getElementById("charnamespace").innerHTML+=name;
+                    document.getElementById("charcbuttspace").innerHTML+=`<button id="viewcharbutton" type="button" class="btn btn-primary">View Character</button>`;
+                    document.getElementById("rcharbuttspace").innerHTML+=`<button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character</button>`;
+            
+                 })})}})})
+
 
 //brings up name update form when button clicked
 document.querySelector("#updatenamebutton").addEventListener("click", function(upName) {
