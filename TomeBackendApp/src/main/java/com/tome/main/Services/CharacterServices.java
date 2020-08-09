@@ -28,7 +28,27 @@ public class CharacterServices {
 	public Characters viewById(int id) {
 		Characters found = this.repo.findById(id).orElseThrow(CharacterNotFoundException::new);
 		return found;
+	}
+	
+	public Characters update(Characters newChar, int id) {
+		try {
+			Characters Char = viewById(id);
+		newChar.setChar_id(id);
+		Characters saved = this.repo.save(newChar);
+		return saved;
+		}
+		catch (CharacterNotFoundException e) {
+			return null;
+		}
 		
+	}
+	public Characters kill(int id) {
+		Characters dead = viewById(id);
+		dead.setAlive(false);
+		Player player = this.playerservice.viewById(dead.getFk_player_id());
+		player.setActiveChar(0);
+		this.playerservice.update(player, player.getPlayer_id());
+		return this.update(dead, id);
 	}
 
 }
