@@ -54,3 +54,7 @@ document.querySelector("#retirecharbutton").addEventListener("click", function(r
         window.location.href="Account.html"
     }
 })
+document.querySelector("#buyskillbutton").addEventListener("click", function(a) {
+    
+    window.location.href="spendXP.html"
+})

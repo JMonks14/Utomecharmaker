@@ -29,17 +29,20 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="form-row">
-              <label for="choosetree">Choose a skill tree:</label>
-          <select class="form-control" id="choosetree">
-            <option>---</option>
-            <option>Armour</option>
-            <option>Body</option>
-            <option>Resistance</option>
-            <option>Magic</option>
-            <option>Weapons</option>
-          </select>
-         </div>
+
+            <div class="btn-group">
+              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Skill Tree
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button id="armourdrop" class="dropdown-item" type="button">Armour</button>
+                <button id="bodydrop" class="dropdown-item" type="button">Body</button>
+                <button id="resdrop" class="dropdown-item" type="button">Resistance</button>
+                <button id="magicdrop" class="dropdown-item" type="button">Magic</button>
+                <button id="weapondrop" class="dropdown-item" type="button">Weapons</button>
+              </div>
+            </div>
+         <br>   
          <br>
          <div class="form-row">
           <label for="chooseskill">Choose a skill:</label>
@@ -56,11 +59,16 @@
      </div>
           </div>
           <div class="col">
-            <img id="tree">
+            <br>
+            <center>
+            <h2 id="treehead"></h2>
+            <br>
+            <div id="picspace"></div>
+          </center>
           </div>
         </div>
 
-    
+    <script src="buyskill.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
