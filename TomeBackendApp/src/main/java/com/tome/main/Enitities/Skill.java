@@ -20,6 +20,7 @@ public class Skill {
 	private int prerequisite_3;
 	private int prerequisite_4;
 	private int prerequisite_5;
+	private boolean is_multibuy;
 	
 	public int getSkill_id() {
 		return skill_id;
@@ -74,6 +75,12 @@ public class Skill {
 	}
 	public void setPrerequisite_5(int prerequisite_5) {
 		this.prerequisite_5 = prerequisite_5;
+	}
+	public boolean isIs_multibuy() {
+		return is_multibuy;
+	}
+	public void setIs_multibuy(boolean is_multibuy) {
+		this.is_multibuy = is_multibuy;
 	}
 	
 	
