@@ -1,0 +1,6 @@
+CREATE TABLE char_spells (
+fk_char_id int NOT NULL,
+fk_spell_id int NOT NULL,
+FOREIGN KEY (fk_char_id) REFERENCES characters (char_id),
+FOREIGN KEY (fk_spell_id) REFERENCES spells (spell_id)
+);

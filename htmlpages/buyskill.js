@@ -73,6 +73,53 @@ function loadSkill(n) {
             document.getElementById("skillnamepara").innerHTML= data.skill_name
             document.getElementById("descripheading").innerHTML="Skill Description:"
             document.getElementById("skillbuydescription").innerHTML=data.description
+            if (n===31) {
+              getSpells()
+            }
 
           })  
 })}
+function getSpells() {
+  fetch(`http://localhost:8010/spell/listall`)
+    .then(function(response) {
+        if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
+          }
+          document.getElementById("spelldrophead").innerHTML="Choose A Spell"
+          document.getElementById("spellform").innerHTML=`<button id="choosespellbutt" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" width="50%">
+          Spell
+          </button>
+          <div id ="choosespell" class="dropdown-menu" aria-labelledby="dropdownMenu2"></div>`
+
+          response.json().then(function(data) {
+            console.log(data);
+            for (let i =1; i<data.length;i++) {
+
+              let formoption = `<button id="spellget_${data[i].spell_id}" onclick="loadSpell(${data[i].spell_id})" class="dropdown-item" type="button">${data[i].spell_name}</button>`
+              document.getElementById("choosespell").innerHTML+=formoption;
+            }            
+          });
+
+})}
+function loadSpell(n) {
+  fetch(`http://localhost:8010/spell/find/${n}`)
+    .then(function(response) {
+        if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
+          }
+          response.json().then(function(data) {
+            
+            document.getElementById("skillnamehead").innerHTML="Spell Name:"
+            document.getElementById("skillnamepara").innerHTML= data.spell_name
+            document.getElementById("descripheading").innerHTML="Spell Description:"
+            document.getElementById("skillbuydescription").innerHTML=data.description
+            if (data.spell_name==="Fling") {
+              document.getElementById("skillbuydescription").innerHTML+=" You may also cast mass fling for 3 MP."
+            }else if (data.spell_name==="Mute 30") {
+              document.getElementById("skillbuydescription").innerHTML+=". You may also cast mass mute 30 for 2 MP."
+            }
+    })})}
