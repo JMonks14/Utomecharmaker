@@ -1,18 +1,5 @@
-fetch(`http://localhost:8010/charskills/byid/${sessionStorage.getItem("Cid")}`)
-    .then(function(response) {
-        if (response.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' +
-              response.status);
-            return;
-          }
-          response.json().then(function(data) {
-            console.log(data);
-          })
-        }).catch(function(err) {
-          console.log('Fetch Error :-S', err);
 
-          
-        });
+
 
 document.querySelector("#armourdrop").addEventListener("click", function(a) {
     a.preventDefault()
@@ -55,20 +42,26 @@ fetch(`http://localhost:8010/skills/listbytree/${tree_id}`)
               response.status);
             return;
           }
+          document.getElementById("manacosthead").innerHTML=""
+              document.getElementById("manacostpara").innerHTML=""
+              document.getElementById("rangehead").innerHTML=""
+              document.getElementById("rangepara").innerHTML=""
+              document.getElementById("skillnamehead").innerHTML=""
+            document.getElementById("skillnamepara").innerHTML= ""
+            document.getElementById("descripheading").innerHTML=""
+            document.getElementById("skillbuydescription").innerHTML=""
+            document.getElementById("spelldrophead").innerHTML=""
+              document.getElementById("spellform").innerHTML=""
           document.getElementById("skilldrophead").innerHTML="Choose A Skill"
           document.getElementById("skillform").innerHTML=`<button id="chooseskillbutt" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" width="50%">
           Skills
           </button>
           <div id ="chooseskill" class="dropdown-menu" aria-labelledby="dropdownMenu2"></div>`
+          
+                  
+          
           // Examine the text in the response
-          response.json().then(function(data) {
-            console.log(data);
-            for (let i =0; i<data.length;i++) {
-
-              let formoption = `<button id="skillget_${data[i].skill_id}" onclick="loadSkill(${data[i].skill_id})" class="dropdown-item" type="button">${data[i].skill_name}</button>`
-              document.getElementById("chooseskill").innerHTML+=formoption;
-            }            
-          });
+          response.json().then(function(data) {getCharSkills(data)});
         }
       )
       .catch(function(err) {
@@ -90,12 +83,22 @@ function loadSkill(n) {
             document.getElementById("descripheading").innerHTML="Skill Description:"
             document.getElementById("skillbuydescription").innerHTML=data.description
             if (n===31) {
+              document.getElementById("buybuttspace").innerHTML=``
               getSpells()
+            } else {
+              document.getElementById("manacosthead").innerHTML=""
+              document.getElementById("manacostpara").innerHTML=""
+              document.getElementById("rangehead").innerHTML=""
+              document.getElementById("rangepara").innerHTML=""
+              document.getElementById("spelldrophead").innerHTML=""
+              document.getElementById("spellform").innerHTML=""
+              document.getElementById("buybuttspace").innerHTML=`<button id="confirmbuy" type="button" class="btn btn-primary">Confirm Skill Purchase</button>`
             }
 
           })  
 })}
 function getSpells() {
+  
   fetch(`http://localhost:8010/spell/listall`)
     .then(function(response) {
         if (response.status !== 200) {
@@ -143,3 +146,45 @@ function loadSpell(n) {
               document.getElementById("skillbuydescription").innerHTML+=". You may also cast mass mute 30 for 2 MP."
             }
     })})}
+async function getCharSkills(inskills) {
+  let skills=inskills
+    fetch(`http://localhost:8010/charskills/byid/${sessionStorage.getItem("Cid")}`)
+    .then(function(response) {
+        if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
+          }
+                              
+          
+          response.json().then(function(data) {
+            // console.log(data);
+            let char_skills=[]                      
+            char_skills.push(6)
+            console.log(char_skills);
+            console.log(skills);
+          for (x in data.length){
+            skill_ids.push(data[x].fk_skill_id)
+          }
+          // console.log(skills);
+            for (let i =0; i<skills.length;i++) {
+              let skill=skills[i]
+              if(skill.prerequisite_1!=0) {
+                if(!(char_skills.includes(skill.prerequisite_1) || char_skills.includes(skill.prerequisite_2) || char_skills.includes(skill.prerequisite_3) || char_skills.includes(skill.prerequisite_4) || char_skills.includes(skill.prerequisite_5))) {
+                  continue
+                }
+              }
+              if (char_skills.includes(skill.skill_id) && skill.is_multibuy===false) continue;
+
+              let formoption = `<button id="skillget_${skills[i].skill_id}" onclick="loadSkill(${skills[i].skill_id})" class="dropdown-item" type="button">${skills[i].skill_name}</button>`
+              document.getElementById("chooseskill").innerHTML+=formoption;
+            }    
+          
+          })
+                  
+           
+        }).catch(function(err) {
+          console.log('Fetch Error :-S', err);         
+       });
+         
+      }
