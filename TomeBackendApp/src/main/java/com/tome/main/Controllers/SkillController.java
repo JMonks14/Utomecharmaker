@@ -29,5 +29,10 @@ public class SkillController {
 	public Skill findById(@PathVariable int id) {
 		return this.service.findById(id);
 	}
+	
+	@GetMapping("/bycharid/{id}")
+	public int[] charSkillIds(@PathVariable int id) {
+		return this.service.charSkillIds(id);
+	}
 
 }

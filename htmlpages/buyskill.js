@@ -117,6 +117,10 @@ function loadSpell(n) {
             document.getElementById("skillnamepara").innerHTML= data.spell_name
             document.getElementById("descripheading").innerHTML="Spell Description:"
             document.getElementById("skillbuydescription").innerHTML=data.description
+            document.getElementById("manacosthead").innerHTML="Mana Cost:"
+            document.getElementById("manacostpara").innerHTML=data.mana_cost
+            document.getElementById("rangehead").innerHTML="Range:"
+            document.getElementById("rangepara").innerHTML=data.type
             if (data.spell_name==="Fling") {
               document.getElementById("skillbuydescription").innerHTML+=" You may also cast mass fling for 3 MP."
             }else if (data.spell_name==="Mute 30") {

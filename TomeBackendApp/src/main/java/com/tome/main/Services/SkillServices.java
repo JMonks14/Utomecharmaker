@@ -26,5 +26,9 @@ public class SkillServices {
 	public Skill findById(int id) {
 		return this.repo.findById(id).orElseThrow(SkillNotFoundException::new);
 	}
+	
+	public int[] charSkillIds(int char_id) {
+		return this.repo.getCharSkillIds(char_id);
+	}
 
 }
