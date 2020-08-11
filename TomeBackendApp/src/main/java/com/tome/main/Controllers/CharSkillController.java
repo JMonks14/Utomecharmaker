@@ -9,27 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tome.main.Enitities.Skill;
-import com.tome.main.Services.SkillServices;
+import com.tome.main.Enitities.CharSkills;
+import com.tome.main.Services.CharSkillServices;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/skills")
-public class SkillController {
+@RequestMapping("/charskills")
+public class CharSkillController {
 	
 	@Autowired
-	SkillServices service;
+	CharSkillServices service;
 	
-	@GetMapping(value="/listbytree/{tree_id}")
-	public List<Skill> listByTree(@PathVariable int tree_id) {
-		return this.service.skillsByTreeId(tree_id);
+	@GetMapping("/byid/{id}")
+	public List<CharSkills> charSkillIds(@PathVariable int id) {
+		return this.service.charSkillIds(id);
 	}
-	
-	@GetMapping(value="/findbyid/{id}")
-	public Skill findById(@PathVariable int id) {
-		return this.service.findById(id);
-	}
-	
-	
 
 }

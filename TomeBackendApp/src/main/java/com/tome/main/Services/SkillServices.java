@@ -19,16 +19,10 @@ public class SkillServices {
 		return this.repo.findByTreeId(tree_id);
 	}
 	
-	public void buySkill(int char_id, int skill_id) {
-		this.buySkill(char_id, skill_id);
-	}
-	
 	public Skill findById(int id) {
 		return this.repo.findById(id).orElseThrow(SkillNotFoundException::new);
 	}
 	
-	public int[] charSkillIds(int char_id) {
-		return this.repo.getCharSkillIds(char_id);
-	}
+	
 
 }
