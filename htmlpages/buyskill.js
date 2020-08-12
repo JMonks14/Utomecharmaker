@@ -93,6 +93,12 @@ function loadSkill(n) {
               document.getElementById("spelldrophead").innerHTML=""
               document.getElementById("spellform").innerHTML=""
               document.getElementById("buybuttspace").innerHTML=`<button id="confirmbuy" type="button" class="btn btn-primary">Confirm Skill Purchase</button>`
+              document.querySelector("#confirmbuy").addEventListener("click",function(b) {
+                b.preventDefault
+                buySkill(n)
+                
+                
+              })
             }
 
           })  
@@ -121,7 +127,9 @@ function getSpells() {
             }            
           });
 
-})}
+}).catch(function(err) {
+  console.log('Fetch Error :-S', err);
+});}
 function loadSpell(n) {
   fetch(`http://localhost:8010/spell/find/${n}`)
     .then(function(response) {
@@ -145,9 +153,12 @@ function loadSpell(n) {
             }else if (data.spell_name==="Mute 30") {
               document.getElementById("skillbuydescription").innerHTML+=". You may also cast mass mute 30 for 2 MP."
             }
-    })})}
-async function getCharSkills(inskills) {
+    })}).catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });}
+function getCharSkills(inskills) {
   let skills=inskills
+
     fetch(`http://localhost:8010/charskills/byid/${sessionStorage.getItem("Cid")}`)
     .then(function(response) {
         if (response.status !== 200) {
@@ -160,12 +171,15 @@ async function getCharSkills(inskills) {
           response.json().then(function(data) {
             // console.log(data);
             let char_skills=[]                      
-            char_skills.push(6)
-            console.log(char_skills);
+            console.log(data);
+            
             console.log(skills);
-          for (x in data.length){
-            skill_ids.push(data[x].fk_skill_id)
+          for (let x=0; x < data.length; x++){
+            let char_skill=data[x].fk_skill_id
+            console.log(char_skill);
+            char_skills.push(char_skill)
           }
+          console.log(char_skills);
           // console.log(skills);
             for (let i =0; i<skills.length;i++) {
               let skill=skills[i]
@@ -188,3 +202,44 @@ async function getCharSkills(inskills) {
        });
          
       }
+function buySkill(n) {
+        const buy = {
+          "fk_char_id": sessionStorage.getItem("Cid"),
+          "fk_skill_id": n
+        }
+        fetch("http://localhost:8010/charskills/buy", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(buy)
+        }).then(response => response)
+        .then(function(data) {
+        console.log("Request succeeded with JSON response",data);       
+        })
+        .then(function () {
+          
+          if (n===6)
+
+          window.location.href("viewchar.html")
+        })        
+        .catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      });
+      }
+function getChar() {
+  let Cid = sessionStorage.get("Cid")
+  fetch(`http://localhost:8010/character/view/${Cid}`)
+               .then(
+                     function(response) {
+                     if (response.status!==200) {
+                     console.log("There was a problem, status code " + response.status);
+                     return;
+                     }
+                     response.json().then(function(data) {
+                       
+                     }
+                     
+                     )})
+}

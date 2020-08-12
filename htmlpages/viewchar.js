@@ -35,7 +35,9 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                                 document.getElementById("xppara").innerHTML+=maxxp-data.xp_spent
                             }
                      )})
-                 })})
+                 })}).catch(function(error) {
+                    console.log("Request failed", error);
+                })
 document.querySelector("#retirecharbutton").addEventListener("click", function(retire) {
     retire.preventDefault()
     let conf = window.confirm("Your character will be considered dead and you will no longer be able to play them. Please click ok to confirm if you wish to proceed.")
@@ -48,7 +50,7 @@ document.querySelector("#retirecharbutton").addEventListener("click", function(r
         .then(response => response)
         .then(function(data) {
             console.log("Request succeeded with JSON response",data);
-        }).then(function(error) {
+        }).catch(function(error) {
             console.log("Request failed", error);
         })
         window.location.href="Account.html"
