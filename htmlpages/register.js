@@ -10,7 +10,8 @@ function playerReg(data) {
     }).then(response => response)
     .then(function (data) {
         console.log("Request succeeded with JSON response",data);
-    }).catch(function(error) {
+    }).then(window.location.href="Account.html")
+    .catch(function(error) {
         console.log("Request failed", error);
     })
 
@@ -38,6 +39,6 @@ document.querySelector("#playerreg").addEventListener("submit",function(e) {
             "password": password
         }
         playerReg(data)
-        window.location.href="Account.html"
+        // window.location.href="Account.html"
     }
   });

@@ -5,7 +5,7 @@ var player = {
 }
 
 //fetches user info and writed to page
-fetch("http://localhost:8010/player/view/1")
+fetch("http://localhost:8010/player/view/10")
 .then(
     function(response) {
         if (response.status!==200) {

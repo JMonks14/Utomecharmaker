@@ -218,18 +218,14 @@ function buySkill(n) {
         .then(function(data) {
         console.log("Request succeeded with JSON response",data);       
         })
-        .then(function () {
-          
-          if (n===6)
-
-          window.location.href("viewchar.html")
-        })        
+        .then(getChar(n))
+                  
         .catch(function(err) {
         console.log('Fetch Error :-S', err);
       });
       }
-function getChar() {
-  let Cid = sessionStorage.get("Cid")
+function getChar(n) {
+  let Cid = sessionStorage.getItem("Cid")
   fetch(`http://localhost:8010/character/view/${Cid}`)
                .then(
                      function(response) {
@@ -238,8 +234,48 @@ function getChar() {
                      return;
                      }
                      response.json().then(function(data) {
-                       
+                       let char = data
+                       console.log(char);
+                       let APL2=[9,12]
+                       let APL4=6
+                       let APH2=[10,13]
+                       let APH4=7
+                       let HP=[15,17,19,21]
+                       let MP1=[32,34,35]
+                       let MP3=36
+                       let APM2=[37,38]
+                       char.xp_spent+=1
+                       if (APL2.includes(n)) char.ap_light+=2;
+                       if (APL4===n) char.ap_light+=4;
+                       if (APH2.includes(n)) char.ap_heavy+=2;
+                       if (APH4===n) char.ap_heavy+=8;
+                       if (HP.includes(n)) char.hp+=1;
+                       if (MP1.includes(n)) char.mp+=1;
+                       if (MP3===n) char.mp+=3;
+                       if (APM2.includes(n)) char.ap_magic+=2;
+                       console.log((char));
+                       updateChar(char)
                      }
                      
                      )})
+                     .catch(function(err) {
+                      console.log('Fetch Error :-S', err);
+                    })
+}
+function updateChar(char) {
+  fetch(`http://localhost:8010/character/update/${char.char_id}`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(char)
+    }).then(response => response)
+    .then(function (data) {
+        console.log("Request succeeded with JSON response",data);
+    })
+    .then(window.location.href="viewchar.html")
+    .catch(function(error) {
+        console.log("Request failed", error);
+    })
 }

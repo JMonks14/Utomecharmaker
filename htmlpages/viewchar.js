@@ -21,6 +21,9 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                         if (data.ap_heavy > 0) {
                             statstring += `Max AP (heavy): ${data.ap_heavy} <br>`
                         }
+                        if (data.ap_magic > 0) {
+                            statstring += `Max AP (magic): ${data.ap_magic} <br>`
+                        }
 
                         document.getElementById("stats").innerHTML+=statstring
 

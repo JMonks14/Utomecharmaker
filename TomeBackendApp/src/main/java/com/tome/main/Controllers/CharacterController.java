@@ -39,5 +39,10 @@ public class CharacterController {
 		Characters killed = this.service.kill(id);
 		return new ResponseEntity<>(killed, HttpStatus.ACCEPTED);
 	}
+	@PostMapping("/update/{id}")
+	public ResponseEntity<Characters> update(@RequestBody Characters newChar, @PathVariable int id) {
+		Characters updated = this.service.update(newChar, id);
+		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
+	}
 
 }
