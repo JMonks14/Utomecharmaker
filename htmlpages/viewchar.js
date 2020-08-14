@@ -7,6 +7,7 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                      return;
                      }
                      response.json().then(function(data) {
+                         console.log(data);
                         let name = data.char_name
                         document.getElementById("namespace").innerHTML+=name;
                         let bg = data.char_background
@@ -100,6 +101,28 @@ fetch(`http://localhost:8010/spell/findbychar/${Cid}`)
         }
         response.json().then(function(data) {
             console.log(data);
+            if (data.length > 0) {
+                document.getElementById("spellshead").innerHTML="Character Spells"
+                document.getElementById("spelltablespace").innerHTML=`<table id="spellstable" class="table table-striped" width="100%">
+                <thead>
+                  <tr>
+                    <th scope="col">Spell Name</th>
+                    <th scope="col">Mana Cost</th>
+                    <th scope="col">Range</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody id="spelltable">
+                  
+                </tbody>
+                </table>`
+            }
+            for (a=0; a < data.length; a++) {
+                document.getElementById("spelltable").innerHTML+=`<tr><th scope="row" class="tabletxt">${data[a].spell_name}</th>
+                <td class="tabletxt">${data[a].mana_cost}</td>
+                <td class="tabletxt">${data[a].type}</td>
+                <td class="tabletxt">${data[a].description}</td></tr>`
+            }
         })}).catch(function(error) {
             console.log("Request failed", error);
         })
@@ -124,3 +147,63 @@ document.querySelector("#retirecharbutton").addEventListener("click", function(r
 document.querySelector("#buyskillbutton").addEventListener("click", function(a) {
     window.location.href="spendXP.html"
 })
+
+document.querySelector("#resetXPbutton").addEventListener("click", () => {
+     let reset = window.confirm("This will delete all of your character skills and reset your XP. Are you sure you wish to proceed?")
+     if(reset != true) {console.log(reset);}
+     else {ResetXP()}
+})
+function ResetXP() {
+   
+    fetch(`http://localhost:8010/charskills/reset/${Cid}`, {
+        method: "DELETE",
+        mode: "cors" }
+        )
+        .then(response => response)
+        .then(function(data) {
+            console.log("Request succeeded with JSON response",data);
+        }).then(resetSpells())
+        .catch(function(error) {
+            console.log("Request failed", error);
+        })
+}
+function resetSpells() {
+    fetch(`http://localhost:8010/charspell/reset/${Cid}`, {
+        method: "DELETE",
+        mode: "cors" }
+        )
+        .then(response => response)
+        .then(function(data) {
+            console.log("Request succeeded with JSON response",data);
+        }).then(resetChar())
+        .catch(function(error) {
+            console.log("Request failed", error);
+        })
+}
+function resetChar() {
+    const newChar = {
+        "char_id": Cid,
+        "hp": 3,
+        "mp": 3,
+        "ap_basic": 1,
+        "xp_spent": 0,
+        "ap_light": 0,
+        "ap_heavy": 0
+
+    }
+    fetch(`http://localhost:8010/character/update/${Cid}`, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newChar)
+      }).then(response => response)
+      .then(function (data) {
+          console.log("Request succeeded with JSON response",data);
+      })
+      .then(location.reload())
+      .catch(function(error) {
+          console.log("Request failed", error);
+      })
+  }

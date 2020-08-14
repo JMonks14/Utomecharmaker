@@ -1,7 +1,3 @@
 .tabletxt {
     font-size: small;
 }
-#skilltablearea{
-    overflow: scroll;
-    max-height: 1000px;
-}

@@ -33,8 +33,15 @@ public class CharacterServices {
 	public Characters update(Characters newChar, int id) {
 		try {
 			Characters Char = viewById(id);
-		newChar.setChar_id(id);
-		Characters saved = this.repo.save(newChar);
+		Char.setAP_basic(newChar.getAP_basic());
+		Char.setAP_light(newChar.getAP_light());
+		Char.setAP_heavy(newChar.getAP_heavy());
+		Char.setAP_magic(newChar.getAP_magic());
+		Char.setHP(newChar.getHP());
+		Char.setMP(newChar.getMP());
+		Char.setAlive(newChar.getAlive());
+		Char.setXP_spent(newChar.getXP_spent());
+		Characters saved = this.repo.save(Char);
 		return saved;
 		}
 		catch (CharacterNotFoundException e) {

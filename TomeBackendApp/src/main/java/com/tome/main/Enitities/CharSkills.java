@@ -12,7 +12,7 @@ public class CharSkills {
 	@Id
 	@GeneratedValue
 	private int line_id;
-	private int fk_char_id;
+	private int fkCharId;
 	private int fk_skill_id;
 	
 	public int getLine_id() {
@@ -22,10 +22,10 @@ public class CharSkills {
 		this.line_id = line_id;
 	}
 	public int getFk_char_id() {
-		return fk_char_id;
+		return fkCharId;
 	}
 	public void setFk_char_id(int fk_char_id) {
-		this.fk_char_id = fk_char_id;
+		this.fkCharId = fk_char_id;
 	}
 	public int getFk_skill_id() {
 		return fk_skill_id;

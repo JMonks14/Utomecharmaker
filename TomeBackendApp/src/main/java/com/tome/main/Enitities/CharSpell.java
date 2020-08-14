@@ -12,7 +12,7 @@ public class CharSpell {
 	@Id
 	@GeneratedValue
 	private int line_id;
-	private int fk_char_id;
+	private int fkCharId;
 	private int fk_spell_id;
 	
 	public int getLine_id() {
@@ -22,10 +22,10 @@ public class CharSpell {
 		this.line_id = line_id;
 	}
 	public int getFk_char_id() {
-		return fk_char_id;
+		return fkCharId;
 	}
 	public void setFk_char_id(int fk_char_id) {
-		this.fk_char_id = fk_char_id;
+		this.fkCharId = fk_char_id;
 	}
 	public int getFk_spell_id() {
 		return fk_spell_id;

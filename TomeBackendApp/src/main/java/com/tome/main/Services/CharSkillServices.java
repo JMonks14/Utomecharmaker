@@ -21,5 +21,8 @@ public class CharSkillServices {
 	public CharSkills buySkill(CharSkills skill) {
 		return this.repo.save(skill);
 	}
+	public void reset(int char_id) {
+		 this.repo.reset(char_id);
+	}
 
 }

@@ -32,7 +32,7 @@ public class SpellController {
 	}
 	
 	@GetMapping(value="/findbychar/{id}")
-	public List<Spell> getCharSkills(@PathVariable int id) {
+	public List<Spell> getCharSpells(@PathVariable int id) {
 		return this.service.getCharSpells(id);
 	}
 

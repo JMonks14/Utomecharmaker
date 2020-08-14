@@ -21,5 +21,8 @@ public class CharSpellServices {
 	public CharSpell buySpell(CharSpell spell) {
 		return this.repo.save(spell);
 	}
+	public void reset(int char_id) {
+		 this.repo.reset(char_id);
+	}
 
 }
