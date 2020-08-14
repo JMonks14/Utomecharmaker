@@ -1,9 +1,15 @@
 package com.tome.main.Enitities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+
+
 
 @Entity
 @Table(name="skills")
@@ -21,6 +27,9 @@ public class Skill {
 	private int prerequisite_4;
 	private int prerequisite_5;
 	private boolean is_multibuy;
+	
+//	@ManyToMany(mappedBy = "skills")
+//	Set<Characters> characters;
 	
 	public int getSkill_id() {
 		return skill_id;

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tome.main.Enitities.CharSkillGroup;
 import com.tome.main.Enitities.Skill;
 import com.tome.main.Exceptions.SkillNotFoundException;
 import com.tome.main.Repos.SkillRepo;
@@ -23,6 +24,8 @@ public class SkillServices {
 		return this.repo.findById(id).orElseThrow(SkillNotFoundException::new);
 	}
 	
-	
+	public List<Skill> getCharSkills(int char_id) {
+		return this.repo.getCharSkills(char_id);
+	}
 
 }

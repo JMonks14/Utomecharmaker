@@ -44,10 +44,14 @@
             <button id="buyskillbutton" type="button" class="btn btn-primary">Buy a Skill</button>  <button id="resetXPbutton" type="button" class="btn btn-primary">Reset Skills</button>
             <br><br>
             <button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character / Report Character Death</button>
+            <h5 id="spellshead"></h5>
+            <div id="spelltablespace"></div>
           </div>
           <div class="col">
              <h5>Character Skills</h5><br>
-            <table class="table table-striped">
+             <div id="msgspace"></div>
+             <div id=" skilltablearea"class="overflow-auto" height="50%">
+            <table id="skillstable" class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Skill Name</th>
@@ -56,12 +60,10 @@
                 </tr>
               </thead>
               <tbody id="skilltable">
-                <tr>
-                  <th scope="row" class="tabletxt"></th>
-                  <td class="tabletxt"></td>
-                  <td class="tabletxt"></td>
+                
               </tbody>
               </table>
+            </div>
           </div>
         </div>
 

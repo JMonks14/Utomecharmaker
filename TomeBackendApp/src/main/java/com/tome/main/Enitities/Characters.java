@@ -1,9 +1,13 @@
 package com.tome.main.Enitities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +39,15 @@ public class Characters {
 	private int AP_magic;
 	
 	private int XP_spent;
+	
+//	@ManyToMany
+//	@JoinTable(
+//	name="char_skills",
+//	joinColumns= @JoinColumn(name="fk_char_id"),
+//	inverseJoinColumns= @JoinColumn(name="fk_skill_id"))
+//	Set<Skill> skills;
+	
+	
 	
 	public int getChar_id() {
 		return char_id;

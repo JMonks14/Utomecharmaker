@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tome.main.Enitities.Skill;
 import com.tome.main.Enitities.Spell;
 import com.tome.main.Services.SpellServices;
 
@@ -28,6 +29,11 @@ public class SpellController {
 	@GetMapping("/find/{id}")
 	public Spell findById(@PathVariable int id) {
 		return this.service.findById(id);
+	}
+	
+	@GetMapping(value="/findbychar/{id}")
+	public List<Spell> getCharSkills(@PathVariable int id) {
+		return this.service.getCharSpells(id);
 	}
 
 }
