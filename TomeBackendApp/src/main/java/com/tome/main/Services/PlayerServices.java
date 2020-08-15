@@ -37,14 +37,26 @@ public class PlayerServices {
 	public Player update(Player newPlayer, int id) {
 		try {
 			Player player = viewById(id);
-		newPlayer.setPlayer_id(id);
-		Player saved = this.repo.save(newPlayer);
+		if (newPlayer.getFirst_name()!=null)
+		player.setFirst_name(newPlayer.getFirst_name());
+		if (newPlayer.getLast_name()!=null)
+		player.setLast_name(newPlayer.getLast_name());
+		if (newPlayer.getUsername()!=null)
+		player.setUsername(newPlayer.getUsername());
+		if (newPlayer.getPassword()!=null)
+		player.setPassword(newPlayer.getPassword());
+		if (newPlayer.getActiveChar()!=0)
+		player.setActiveChar(newPlayer.getActiveChar());
+		Player saved = this.repo.save(player);
 		return saved;
 		}
 		catch (PlayerNotFoundException e) {
 			return null;
 		}
 		
+	}
+	public Player findByUsername(String username) {
+		return this.repo.findByUsername(username).orElseThrow(PlayerNotFoundException::new);
 	}
 
 }

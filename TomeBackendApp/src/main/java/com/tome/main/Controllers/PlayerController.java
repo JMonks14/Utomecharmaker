@@ -43,5 +43,9 @@ public class PlayerController {
 		Player updated = this.service.update(newPlayer, id);
 		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
 	}
+	@GetMapping("/find/{username}")
+	public Player findByUsername(@PathVariable String username) {
+		return this.service.findByUsername(username);
+	}
 
 }

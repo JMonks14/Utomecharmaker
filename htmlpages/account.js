@@ -3,9 +3,10 @@ let name =""
 let username=""
 var player = {
 }
-
-//fetches user info and writed to page
-fetch("http://localhost:8010/player/view/10")
+let Pid=parseInt(sessionStorage.getItem("Pid"))
+if(!(Pid)) window.location.href="login.html";
+//fetches user info and writes to page
+fetch(`http://localhost:8010/player/view/${Pid}`)
 .then(
     function(response) {
         if (response.status!==200) {
@@ -16,7 +17,7 @@ fetch("http://localhost:8010/player/view/10")
             id = data.player_id
             name = data.first_name + " " + data.last_name
             username = data.username
-            sessionStorage.setItem("Pid", id)
+            
 
             console.log(id);
             console.log(name);
@@ -97,15 +98,13 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
             player.last_name = nlname
         }
         playernameUp(player)
-        location.reload()
-
     })
     
 })
 //function which sends update info
 function playernameUp(data) {
 
-    fetch(`http://localhost:8010/player/update/${data.player_id}`, {
+    fetch(`http://localhost:8010/player/update/${Pid}`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -115,6 +114,7 @@ function playernameUp(data) {
     }).then(response => response)
     .then(function (data) {
         console.log("Request succeeded with JSON response",data);
+        location.reload()
     }).catch(function(error) {
         console.log("Request failed", error);
     })
