@@ -1,3 +1,12 @@
+let Pid=parseInt(sessionStorage.getItem("Pid"))
+if(!(Pid)) window.location.href="login.html";
+
+document.querySelector("#backtocharview").addEventListener("click", (a) => {
+  a.preventDefault
+  window.location.href="viewchar.html"
+})
+
+
 document.querySelector("#armourdrop").addEventListener("click", function(a) {
     a.preventDefault()
     //loads tree picture

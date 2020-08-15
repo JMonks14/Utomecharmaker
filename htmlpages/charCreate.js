@@ -1,3 +1,6 @@
+let Pid=parseInt(sessionStorage.getItem("Pid"))
+if(!(Pid)) window.location.href="login.html";
+
 document.querySelector("#charcreate").addEventListener("submit", function(a) {
     a.preventDefault()
 
@@ -23,7 +26,6 @@ document.querySelector("#charcreate").addEventListener("submit", function(a) {
         window.alert("Character name cannot be blank")
     } else {
         saveChar(newChar)
-        window.location.href="Account.html"
     }
     
 })
@@ -39,7 +41,13 @@ function saveChar(data) {
     }).then(response => response)
     .then(function(data) {
         console.log("Request succeeded with JSON response",data);
+        window.location.href="Account.html"
     }).then(function(error) {
         console.log("Request failed", error);
     })
 }
+
+document.querySelector("#backtoaccount").addEventListener("click", (a) => {
+    a.preventDefault
+    window.location.href="Account.html"
+})

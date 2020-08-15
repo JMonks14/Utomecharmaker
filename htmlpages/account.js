@@ -199,3 +199,8 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
     })
     
 })
+document.querySelector("#logoutbutton").addEventListener("click", (o) => {
+    o.preventDefault
+    sessionStorage.clear()
+    window.location.href="index.html"
+})

@@ -1,3 +1,6 @@
+let Pid=parseInt(sessionStorage.getItem("Pid"))
+if(!(Pid)) window.location.href="login.html";
+
 let Cid = sessionStorage.getItem("Cid")
 fetch(`http://localhost:8010/character/view/${Cid}`)
                .then(
@@ -138,10 +141,10 @@ document.querySelector("#retirecharbutton").addEventListener("click", function(r
         .then(response => response)
         .then(function(data) {
             console.log("Request succeeded with JSON response",data);
+            window.location.href="Account.html"
         }).catch(function(error) {
             console.log("Request failed", error);
-        })
-        window.location.href="Account.html"
+        })      
     }
 })
 document.querySelector("#buyskillbutton").addEventListener("click", function(a) {
@@ -207,3 +210,7 @@ function resetChar() {
           console.log("Request failed", error);
       })
   }
+  document.querySelector("#backtoaccount").addEventListener("click", (a) => {
+    a.preventDefault
+    window.location.href="Account.html"
+})
