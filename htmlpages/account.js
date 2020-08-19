@@ -79,9 +79,14 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
       <input type="text" class="form-control" id="lastnameupdate">
     </div>
     <button id="subnamebutton" type="submit" class="btn btn-primary">Submit</button>
-    </form>`
+    </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
     
     document.getElementById("nameformspace").innerHTML+=nameform;
+
+    document.querySelector("#cancel").addEventListener("click", (c) => {
+        c.preventDefault()
+        location.reload()
+    })
     
     //sends new info when submitted
     document.querySelector("#nameupdate").addEventListener("submit", function(e) {
@@ -131,9 +136,14 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
       <input type="text" class="form-control" id="unameupdate">
     </div>
     <button id="subusernamebutton" type="submit" class="btn btn-primary">Submit</button>
-    </form>`
+    </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
 
     document.getElementById("usernameformspace").innerHTML+=usernameform;
+
+    document.querySelector("#cancel").addEventListener("click", (c) => {
+        c.preventDefault()
+        location.reload()
+    })
 
     document.querySelector("#usernameupdate").addEventListener("submit", function(f) {
         f.preventDefault();
@@ -167,10 +177,14 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
       <label for="newpassordcon">Confirm New Password:</label>
       <input type="password" class="form-control" id="newpasswordcon">
     </div>
-    <button id="subnamebutton" type="submit" class="btn btn-primary">Submit</button>
-    </form>`
+    <button id="subnamebutton" type="submit" class="btn btn-primary">Submit</button> 
+    </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
     
     document.getElementById("passformspace").innerHTML+=passform;
+    document.querySelector("#cancel").addEventListener("click", (c) => {
+        c.preventDefault()
+        location.reload()
+    })
     
     //sends new info when submitted
     document.querySelector("#passwordupdate").addEventListener("submit", function(e) {
@@ -193,9 +207,8 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
             window.alert("Password update successful.")
             location.reload()
         }
-
-       
-
+        
+    
     })
     
 })

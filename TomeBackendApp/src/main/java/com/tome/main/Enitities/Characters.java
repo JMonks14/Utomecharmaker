@@ -40,6 +40,44 @@ public class Characters {
 	
 	private int XP_spent;
 	
+	
+	
+public Characters(String char_name, String race, String origin, String char_background, int fk_player_id,
+			boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic, int xP_spent) {
+		super();
+		this.char_name = char_name;
+		this.race = race;
+		this.origin = origin;
+		this.char_background = char_background;
+		this.fk_player_id = fk_player_id;
+		this.alive = alive;
+		HP = hP;
+		MP = mP;
+		AP_basic = aP_basic;
+		AP_light = aP_light;
+		AP_heavy = aP_heavy;
+		AP_magic = aP_magic;
+		XP_spent = xP_spent;
+	}
+public Characters(int char_id, String char_name, String race, String origin, String char_background,
+			int fk_player_id, boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic,
+			int xP_spent) {
+		super();
+		this.char_id = char_id;
+		this.char_name = char_name;
+		this.race = race;
+		this.origin = origin;
+		this.char_background = char_background;
+		this.fk_player_id = fk_player_id;
+		this.alive = alive;
+		HP = hP;
+		MP = mP;
+		AP_basic = aP_basic;
+		AP_light = aP_light;
+		AP_heavy = aP_heavy;
+		AP_magic = aP_magic;
+		XP_spent = xP_spent;
+	}
 //	@ManyToMany
 //	@JoinTable(
 //	name="char_skills",

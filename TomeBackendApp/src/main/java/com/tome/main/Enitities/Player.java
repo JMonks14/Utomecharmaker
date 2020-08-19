@@ -22,6 +22,28 @@ public class Player {
 	private String password;
 	private int activechar_id;
 	
+		public Player(String first_name, String last_name, String username, String password, int activechar_id) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.username = username;
+		this.password = password;
+		this.activechar_id = activechar_id;
+	}
+		
+		
+	public Player(int player_id, String first_name, String last_name, String username, String password,
+				int activechar_id) {
+			super();
+			this.player_id = player_id;
+			this.first_name = first_name;
+			this.last_name = last_name;
+			this.username = username;
+			this.password = password;
+			this.activechar_id = activechar_id;
+		}
+
+
 	public int getActiveChar() {
 		return activechar_id;
 	}

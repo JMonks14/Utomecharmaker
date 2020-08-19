@@ -9,8 +9,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
-
-
 @Entity
 @Table(name="skills")
 public class Skill {
@@ -31,9 +29,25 @@ public class Skill {
 //	@ManyToMany(mappedBy = "skills")
 //	Set<Characters> characters;
 	
+	
+	
 	public int getSkill_id() {
 		return skill_id;
 	}
+	public Skill(int skill_id, String skill_name, String description, int fk_tree_id, int prerequisite_1,
+		int prerequisite_2, int prerequisite_3, int prerequisite_4, int prerequisite_5, boolean is_multibuy) {
+	super();
+	this.skill_id = skill_id;
+	this.skill_name = skill_name;
+	this.description = description;
+	this.fk_tree_id = fk_tree_id;
+	this.prerequisite_1 = prerequisite_1;
+	this.prerequisite_2 = prerequisite_2;
+	this.prerequisite_3 = prerequisite_3;
+	this.prerequisite_4 = prerequisite_4;
+	this.prerequisite_5 = prerequisite_5;
+	this.is_multibuy = is_multibuy;
+}
 	public void setSkill_id(int skill_id) {
 		this.skill_id = skill_id;
 	}

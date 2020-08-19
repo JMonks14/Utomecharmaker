@@ -15,6 +15,17 @@ public class CharSkills {
 	private int fkCharId;
 	private int fk_skill_id;
 	
+	public CharSkills(int fkCharId, int fk_skill_id) {
+		super();
+		this.fkCharId = fkCharId;
+		this.fk_skill_id = fk_skill_id;
+	}
+	public CharSkills(int line_id, int fkCharId, int fk_skill_id) {
+		super();
+		this.line_id = line_id;
+		this.fkCharId = fkCharId;
+		this.fk_skill_id = fk_skill_id;
+	}
 	public int getLine_id() {
 		return line_id;
 	}
