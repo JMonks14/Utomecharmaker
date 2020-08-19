@@ -41,8 +41,8 @@ public class CharacterServices {
 		Char.setMP(newChar.getMP());
 		Char.setAlive(newChar.getAlive());
 		Char.setXP_spent(newChar.getXP_spent());
-		Characters saved = this.repo.save(Char);
-		return saved;
+		return this.repo.save(Char);
+		
 		}
 		catch (CharacterNotFoundException e) {
 			return null;

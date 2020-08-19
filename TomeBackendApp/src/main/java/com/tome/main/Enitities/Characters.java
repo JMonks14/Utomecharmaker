@@ -38,6 +38,10 @@ public class Characters {
 	
 	
 	
+public Characters() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 public Characters(String char_name, String race, String origin, String char_background, int fk_player_id,
 			boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic, int xP_spent) {
 		super();

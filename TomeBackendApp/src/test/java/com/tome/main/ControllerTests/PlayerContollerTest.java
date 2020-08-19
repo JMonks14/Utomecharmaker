@@ -44,7 +44,6 @@ public class PlayerContollerTest {
 	
 	@Before
 	public void init() {
-		this.repo.deleteAll();
 		this.testplayer= new Player("Bob", "Smith", "Smithy", "neilthebaby",0);
 		this.newtestplayer= new Player("Jack","green", "Beardy", "releaseyourchains",0);
 		this.testplayerwithId = this.repo.save(testplayer);
