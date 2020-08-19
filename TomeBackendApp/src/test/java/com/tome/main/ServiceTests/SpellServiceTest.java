@@ -41,9 +41,9 @@ public class SpellServiceTest {
 		spells.add(spell2);
 		spells.add(spell3);
 		spells.add(spell4);
-		when(this.repo.findAll()).thenReturn(spells);
+		when(this.repo.listAll()).thenReturn(spells);
 		assertEquals(spells, service.listSpells());
-		verify(repo, Mockito.times(1)).findAll();
+		verify(repo, Mockito.times(1)).listAll();
 	}
 	
 	@Test
