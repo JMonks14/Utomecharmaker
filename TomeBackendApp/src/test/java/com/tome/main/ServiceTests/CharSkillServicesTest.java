@@ -1,6 +1,7 @@
 package com.tome.main.ServiceTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -48,6 +49,13 @@ public class CharSkillServicesTest {
 		when(this.repo.save(charskill1)).thenReturn(charskill2);
 		assertEquals(charskill2, this.service.buySkill(charskill1));
 		verify(repo, Mockito.times(1)).save(charskill1);
+	}
+	
+	@Test
+	public void resetTest() {
+		doNothing().doThrow(new RuntimeException()).when(repo).reset(1);
+		this.service.reset(1);;
+		verify(repo, Mockito.times(1)).reset(1);
 	}
 
 }

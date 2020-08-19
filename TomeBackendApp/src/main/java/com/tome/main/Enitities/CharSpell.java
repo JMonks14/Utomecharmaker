@@ -15,6 +15,17 @@ public class CharSpell {
 	private int fkCharId;
 	private int fk_spell_id;
 	
+	public CharSpell(int fkCharId, int fk_spell_id) {
+		super();
+		this.fkCharId = fkCharId;
+		this.fk_spell_id = fk_spell_id;
+	}
+	public CharSpell(int line_id, int fkCharId, int fk_spell_id) {
+		super();
+		this.line_id = line_id;
+		this.fkCharId = fkCharId;
+		this.fk_spell_id = fk_spell_id;
+	}
 	public int getLine_id() {
 		return line_id;
 	}
