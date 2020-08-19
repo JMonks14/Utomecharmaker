@@ -10,22 +10,24 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.tome.main.Enitities.CharSkills;
 import com.tome.main.Repos.CharSkillRepo;
 import com.tome.main.Services.CharSkillServices;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CharSkillServicesTest {
 	
-	@Mock
+	@MockBean
 	CharSkillRepo repo;
 	
-	@InjectMocks
+	@Autowired
 	CharSkillServices service;
 	
 	CharSkills charskill1 = new CharSkills(1,1);

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tome.main.Enitities.Characters;
-import com.tome.main.Enitities.Player;
 import com.tome.main.Services.CharacterServices;
 
 @RestController

@@ -10,23 +10,24 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.tome.main.Enitities.Skill;
 import com.tome.main.Enitities.Spell;
 import com.tome.main.Repos.SpellRepo;
 import com.tome.main.Services.SpellServices;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SpellServiceTest {
 	
-	@Mock
+	@MockBean
 	SpellRepo repo;
 	
-	@InjectMocks
+	@Autowired
 	SpellServices service;
 	
 	Spell spell1 = new Spell("blast",0,1,"ranged","blasts a guy");

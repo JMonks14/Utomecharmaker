@@ -1,12 +1,8 @@
 package com.tome.main.Enitities;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -42,6 +38,14 @@ public class Player {
 			this.password = password;
 			this.activechar_id = activechar_id;
 		}
+	
+	
+
+
+	public Player() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 
 	public int getActiveChar() {

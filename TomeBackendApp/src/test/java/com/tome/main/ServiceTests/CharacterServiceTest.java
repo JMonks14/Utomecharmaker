@@ -6,28 +6,29 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.tome.main.Enitities.Characters;
 import com.tome.main.Enitities.Player;
-import com.tome.main.Exceptions.PlayerNotFoundException;
 import com.tome.main.Repos.CharacterRepo;
 import com.tome.main.Services.CharacterServices;
 import com.tome.main.Services.PlayerServices;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CharacterServiceTest {
 	
-	@Mock
+	@MockBean
 	private CharacterRepo Repo;
 	
-	@Mock
+	@MockBean
 	private PlayerServices playerservice;
 	
-	@InjectMocks
+	@Autowired
 	private CharacterServices service;
 	
 	Player player2 = new Player(1,"Paul", "James","paulinus","romeForever",0);

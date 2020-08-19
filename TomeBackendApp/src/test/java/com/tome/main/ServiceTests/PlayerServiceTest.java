@@ -1,34 +1,27 @@
 package com.tome.main.ServiceTests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.tome.main.Enitities.Player;
-import com.tome.main.Exceptions.PlayerNotFoundException;
 import com.tome.main.Repos.PlayerRepo;
 import com.tome.main.Services.PlayerServices;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PlayerServiceTest {
 	
-	@Mock
+	@MockBean
 	private PlayerRepo Repo;
 	
-	@InjectMocks
+	@Autowired
 	private PlayerServices service;
 	
 	Player player = new Player("Paul", "James","paulinus","romeForever",0);

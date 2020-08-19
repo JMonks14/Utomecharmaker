@@ -1,7 +1,6 @@
 package com.tome.main.ServiceTests;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,23 +10,23 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import com.tome.main.Enitities.Characters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 import com.tome.main.Enitities.Skill;
 import com.tome.main.Repos.SkillRepo;
 import com.tome.main.Services.SkillServices;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SkillServiceTest {
 	
-	@Mock
+	@MockBean
 	SkillRepo repo;
 	
-	@InjectMocks
+	@Autowired
 	SkillServices service;
 	
 	Skill skill1 = new Skill(1,"skill1","a skill",1,0,0,0,0,0,false);

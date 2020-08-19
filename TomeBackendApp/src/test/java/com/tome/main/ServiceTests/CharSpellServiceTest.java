@@ -9,22 +9,24 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.tome.main.Enitities.CharSpell;
 import com.tome.main.Repos.CharSpellRepo;
 import com.tome.main.Services.CharSpellServices;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CharSpellServiceTest {
 	
-	@Mock
+	@MockBean
 	CharSpellRepo repo;
 	
-	@InjectMocks
+	@Autowired
 	CharSpellServices service;
 	
 	CharSpell charspell1 = new CharSpell(1,1);
