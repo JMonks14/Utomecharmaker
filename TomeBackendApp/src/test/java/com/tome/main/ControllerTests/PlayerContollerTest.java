@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tome.main.Enitities.Player;
+import com.tome.main.Repos.CharacterRepo;
 import com.tome.main.Repos.PlayerRepo;
 
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -34,6 +35,9 @@ public class PlayerContollerTest {
 	private PlayerRepo repo;
 	
 	@Autowired
+	CharacterRepo Crepo;
+	
+	@Autowired
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	private Player testplayer;
@@ -44,6 +48,8 @@ public class PlayerContollerTest {
 	
 	@Before
 	public void init() {
+		Crepo.deleteAll();
+		repo.deleteAll();
 		this.testplayer= new Player("Bob", "Smith", "Smithy", "neilthebaby",0);
 		this.newtestplayer= new Player("Jack","green", "Beardy", "releaseyourchains",0);
 		this.testplayerwithId = this.repo.save(testplayer);

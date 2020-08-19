@@ -31,6 +31,10 @@ public class Skill {
 	public int getSkill_id() {
 		return skill_id;
 	}
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Skill(int skill_id, String skill_name, String description, int fk_tree_id, int prerequisite_1,
 		int prerequisite_2, int prerequisite_3, int prerequisite_4, int prerequisite_5, boolean is_multibuy) {
 	super();
