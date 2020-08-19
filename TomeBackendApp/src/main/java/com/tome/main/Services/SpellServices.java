@@ -24,9 +24,9 @@ public class SpellServices {
 		return this.repo.findById(id).orElseThrow(SpellNotFoundException::new);
 	}
 	
-	public void buySpell(int char_id, int spell_id) {
-		this.repo.buySpell(char_id, spell_id);
-	}
+//	public void buySpell(int char_id, int spell_id) {
+//		this.repo.buySpell(char_id, spell_id);
+//	}
 	
 	public List<Spell> getCharSpells(int char_id) {
 		return this.repo.getCharSpells(char_id);

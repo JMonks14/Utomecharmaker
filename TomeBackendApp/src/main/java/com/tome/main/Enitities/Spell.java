@@ -18,6 +18,28 @@ public class Spell {
 	private String type;
 	private String description;
 	
+	
+	public Spell(String spell_name, int prerequisite, int mana_cost, String type, String description) {
+		super();
+		this.spell_name = spell_name;
+		this.prerequisite = prerequisite;
+		this.mana_cost = mana_cost;
+		this.type = type;
+		this.description = description;
+	}
+	
+	
+	public Spell(int spell_id, String spell_name, int prerequisite, int mana_cost, String type, String description) {
+		super();
+		this.spell_id = spell_id;
+		this.spell_name = spell_name;
+		this.prerequisite = prerequisite;
+		this.mana_cost = mana_cost;
+		this.type = type;
+		this.description = description;
+	}
+
+
 	public int getSpell_id() {
 		return spell_id;
 	}
