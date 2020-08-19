@@ -191,7 +191,7 @@ function getCharSpells(inspells) {
           }
           console.log(char_spells);
           // console.log(skills);
-            for (let i =1; i<spells.length;i++) {
+            for (let i =0; i<spells.length;i++) {
               let spell=spells[i]
               if(spell.prerequisite!=0) {
                 if(!(char_spells.includes(spell.prerequisite))) {

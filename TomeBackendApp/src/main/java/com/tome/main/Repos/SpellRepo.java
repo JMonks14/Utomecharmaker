@@ -16,5 +16,8 @@ public interface SpellRepo extends JpaRepository<Spell,Integer>{
 	
 	@Query(value="select spell_id, spell_name, description, prerequisite, mana_cost, type from spells s join char_spells cs on s.spell_id=cs.fk_spell_id where cs.fk_char_id=?1", nativeQuery=true)
 	public List<Spell> getCharSpells(int char_id);
+	
+	@Query(value="select * from spells where spell_id > 0", nativeQuery=true)
+	public List<Spell> listAll();
 
 }

@@ -9,6 +9,10 @@ import javax.persistence.Table;
 @Table(name="char_spells")
 public class CharSpell {
 	
+	public CharSpell() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Id
 	@GeneratedValue
 	private int line_id;

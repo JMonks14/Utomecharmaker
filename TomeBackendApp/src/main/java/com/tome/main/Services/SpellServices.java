@@ -16,7 +16,7 @@ public class SpellServices {
 	SpellRepo repo;
 	
 	public List<Spell> listSpells() {
-		return this.repo.findAll();
+		return this.repo.listAll();
 	}
 	
 	public Spell findById(int id) {

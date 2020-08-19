@@ -18,7 +18,11 @@ public class Spell {
 	private String type;
 	private String description;
 	
-	
+	public Spell() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Spell(String spell_name, int prerequisite, int mana_cost, String type, String description) {
 		super();
 		this.spell_name = spell_name;
