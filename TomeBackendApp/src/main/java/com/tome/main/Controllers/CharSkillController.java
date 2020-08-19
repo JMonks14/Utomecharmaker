@@ -37,9 +37,9 @@ public class CharSkillController {
 	}
 	
 	@DeleteMapping("reset/{id}")
-	public void reset(@PathVariable int id) {
-		  this.service.reset(id);
-		
+	public ResponseEntity<Integer> reset(@PathVariable int id) {
+		this.service.reset(id);
+		return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
 	}
 
 }
