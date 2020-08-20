@@ -157,8 +157,7 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
             player.username = nuname
         }
         playernameUp(player)
-        location.reload()
-
+        // location.reload()
 })})
 function passwordUpLoad(player) {
 //brings up name update form when button clicked
