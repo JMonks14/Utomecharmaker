@@ -1,3 +1,6 @@
+let Pid = sessionStorage.getItem("Pid")
+if (Pid) window.location.href="Account.html";
+
 document.querySelector("#playerreg").addEventListener("submit",function(e) {
     e.preventDefault();
     let x = document.querySelector("#playerreg").elements;

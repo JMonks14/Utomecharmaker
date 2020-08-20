@@ -17,6 +17,8 @@ fetch(`http://localhost:8010/player/view/${Pid}`)
             id = data.player_id
             name = data.first_name + " " + data.last_name
             username = data.username
+
+            passwordUpLoad(data)
             
 
             console.log(id);
@@ -158,7 +160,7 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
         location.reload()
 
 })})
-
+function passwordUpLoad(player) {
 //brings up name update form when button clicked
 document.querySelector("#changepasswordbutton").addEventListener("click", function(upName) {
     upName.preventDefault();
@@ -212,6 +214,7 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
     })
     
 })
+}
 document.querySelector("#logoutbutton").addEventListener("click", (o) => {
     o.preventDefault
     sessionStorage.clear()
