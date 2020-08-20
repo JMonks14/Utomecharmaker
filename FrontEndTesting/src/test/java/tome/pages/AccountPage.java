@@ -55,6 +55,27 @@ public class AccountPage {
 	
 	@FindBy(xpath="//*[@id=\"subnamebutton\"]")
 	private WebElement pwSubButton;
+	
+	@FindBy(xpath = "//*[@id=\"createcharbutton\"]")
+	private WebElement createButton;
+	
+	@FindBy(xpath="//*[@id=\"viewcharbutton\"]")
+	private WebElement viewChar;
+	
+	public WebElement getViewChar() {
+		return viewChar;
+	}
+
+	@FindBy(xpath = "//*[@id=\"charnamespace\"]")
+	private WebElement charName;
+
+	public WebElement getCharName() {
+		return charName;
+	}
+
+	public WebElement getCreateButton() {
+		return createButton;
+	}
 
 	public WebElement getChPwButton() {
 		return chPwButton;

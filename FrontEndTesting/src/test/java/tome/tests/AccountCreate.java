@@ -36,7 +36,7 @@ public class AccountCreate {
 	}
 
 	@Test
-	public void aRegisterAccount() throws InterruptedException {
+	public void RegisterAccount() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(8000, TimeUnit.MILLISECONDS);
 		this.home.clickNavToggle();
 	    this.home.clickAccountButton();

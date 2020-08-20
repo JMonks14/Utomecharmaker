@@ -338,8 +338,8 @@ function updateChar(char) {
         }).then(response => response)
         .then(function (data) {
             console.log("Request succeeded with JSON response",data);
+            window.location.href="viewchar.html"
         })
-        .then(window.location.href="viewchar.html")
         .catch(function(error) {
             console.log("Request failed", error);
         })

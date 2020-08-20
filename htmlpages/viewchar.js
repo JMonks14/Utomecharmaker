@@ -204,9 +204,8 @@ function resetChar() {
       }).then(response => response)
       .then(function (data) {
           console.log("Request succeeded with JSON response",data);
-      })
-      .then(location.reload())
-      .catch(function(error) {
+          location.reload()
+      }).catch(function(error) {
           console.log("Request failed", error);
       })
   }
