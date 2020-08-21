@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CharacterServices.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TomeBackendApp James Monks</a> &gt; <a href="index.source.html" class="el_package">com.tome.main.Services</a> &gt; <span class="el_source">CharacterServices.java</span></div><h1>CharacterServices.java</h1><pre class="source lang-java linenums">package com.tome.main.Services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tome.main.Enitities.Characters;
+import com.tome.main.Enitities.Player;
+import com.tome.main.Exceptions.CharacterNotFoundException;
+import com.tome.main.Repos.CharacterRepo;
+
+@Service
+<span class="fc" id="L12">public class CharacterServices {</span>
+	
+	@Autowired
+	CharacterRepo repo;
+	
+	@Autowired
+	PlayerServices playerservice;
+	
+	public Characters create(Characters Char) {
+<span class="fc" id="L21">		Player player = this.playerservice.viewById(Char.getFk_player_id());</span>
+<span class="fc" id="L22">		Characters saved = this.repo.save(Char);</span>
+<span class="fc" id="L23">		player.setActiveChar(saved.getChar_id());</span>
+<span class="fc" id="L24">		this.playerservice.update(player, player.getPlayer_id());</span>
+<span class="fc" id="L25">		return saved;</span>
+	}
+	
+	public Characters viewById(int id) {
+<span class="fc" id="L29">		Characters found = this.repo.findById(id).orElseThrow(CharacterNotFoundException::new);</span>
+<span class="fc" id="L30">		return found;</span>
+	}
+	
+	public Characters update(Characters newChar, int id) {
+		try {
+<span class="fc" id="L35">			Characters Char = viewById(id);</span>
+<span class="fc" id="L36">		Char.setAP_basic(newChar.getAP_basic());</span>
+<span class="fc" id="L37">		Char.setAP_light(newChar.getAP_light());</span>
+<span class="fc" id="L38">		Char.setAP_heavy(newChar.getAP_heavy());</span>
+<span class="fc" id="L39">		Char.setAP_magic(newChar.getAP_magic());</span>
+<span class="fc" id="L40">		Char.setHP(newChar.getHP());</span>
+<span class="fc" id="L41">		Char.setMP(newChar.getMP());</span>
+<span class="fc" id="L42">		Char.setAlive(newChar.getAlive());</span>
+<span class="fc" id="L43">		Char.setXP_spent(newChar.getXP_spent());</span>
+<span class="fc" id="L44">		return this.repo.save(Char);</span>
+		
+		}
+<span class="nc" id="L47">		catch (CharacterNotFoundException e) {</span>
+<span class="nc" id="L48">			return null;</span>
+		}
+		
+	}
+	public Characters kill(int id) {
+<span class="fc" id="L53">		Characters dead = viewById(id);</span>
+<span class="fc" id="L54">		dead.setAlive(false);</span>
+<span class="fc" id="L55">		Player player = this.playerservice.viewById(dead.getFk_player_id());</span>
+<span class="fc" id="L56">		player.setActiveChar(0);</span>
+<span class="fc" id="L57">		this.playerservice.update(player, player.getPlayer_id());</span>
+<span class="fc" id="L58">		return this.update(dead, id);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

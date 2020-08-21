@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Characters.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TomeBackendApp James Monks</a> &gt; <a href="index.source.html" class="el_package">com.tome.main.Enitities</a> &gt; <span class="el_source">Characters.java</span></div><h1>Characters.java</h1><pre class="source lang-java linenums">package com.tome.main.Enitities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=&quot;characters&quot;)
+public class Characters {
+	
+	@Id
+	@GeneratedValue
+	private int char_id;
+	private String char_name;
+	private String race;
+	private String origin;
+	private String char_background;
+	private int fk_player_id;
+	
+	
+	private boolean alive;
+	@Column(columnDefinition=&quot;tinyint default 3&quot;)
+	private int HP;
+	@Column(columnDefinition=&quot;tinyint default 3&quot;)
+	private int MP;
+	@Column(columnDefinition=&quot;tinyint default 1&quot;)
+	private int AP_basic;
+	
+	private int AP_light;
+	
+	private int AP_heavy;
+	
+	private int AP_magic;
+	
+	private int XP_spent;
+	
+	
+	
+public Characters() {
+<span class="fc" id="L42">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L44">	}</span>
+public Characters(String char_name, String race, String origin, String char_background, int fk_player_id,
+			boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic, int xP_spent) {
+<span class="fc" id="L47">		super();</span>
+<span class="fc" id="L48">		this.char_name = char_name;</span>
+<span class="fc" id="L49">		this.race = race;</span>
+<span class="fc" id="L50">		this.origin = origin;</span>
+<span class="fc" id="L51">		this.char_background = char_background;</span>
+<span class="fc" id="L52">		this.fk_player_id = fk_player_id;</span>
+<span class="fc" id="L53">		this.alive = alive;</span>
+<span class="fc" id="L54">		HP = hP;</span>
+<span class="fc" id="L55">		MP = mP;</span>
+<span class="fc" id="L56">		AP_basic = aP_basic;</span>
+<span class="fc" id="L57">		AP_light = aP_light;</span>
+<span class="fc" id="L58">		AP_heavy = aP_heavy;</span>
+<span class="fc" id="L59">		AP_magic = aP_magic;</span>
+<span class="fc" id="L60">		XP_spent = xP_spent;</span>
+<span class="fc" id="L61">	}</span>
+public Characters(int char_id, String char_name, String race, String origin, String char_background,
+			int fk_player_id, boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic,
+			int xP_spent) {
+<span class="fc" id="L65">		super();</span>
+<span class="fc" id="L66">		this.char_id = char_id;</span>
+<span class="fc" id="L67">		this.char_name = char_name;</span>
+<span class="fc" id="L68">		this.race = race;</span>
+<span class="fc" id="L69">		this.origin = origin;</span>
+<span class="fc" id="L70">		this.char_background = char_background;</span>
+<span class="fc" id="L71">		this.fk_player_id = fk_player_id;</span>
+<span class="fc" id="L72">		this.alive = alive;</span>
+<span class="fc" id="L73">		HP = hP;</span>
+<span class="fc" id="L74">		MP = mP;</span>
+<span class="fc" id="L75">		AP_basic = aP_basic;</span>
+<span class="fc" id="L76">		AP_light = aP_light;</span>
+<span class="fc" id="L77">		AP_heavy = aP_heavy;</span>
+<span class="fc" id="L78">		AP_magic = aP_magic;</span>
+<span class="fc" id="L79">		XP_spent = xP_spent;</span>
+<span class="fc" id="L80">	}</span>
+//	@ManyToMany
+//	@JoinTable(
+//	name=&quot;char_skills&quot;,
+//	joinColumns= @JoinColumn(name=&quot;fk_char_id&quot;),
+//	inverseJoinColumns= @JoinColumn(name=&quot;fk_skill_id&quot;))
+//	Set&lt;Skill&gt; skills;
+	
+	
+	
+	public int getChar_id() {
+<span class="fc" id="L91">		return char_id;</span>
+	}
+	public void setChar_id(int char_id) {
+<span class="fc" id="L94">		this.char_id = char_id;</span>
+<span class="fc" id="L95">	}</span>
+	public String getChar_name() {
+<span class="fc" id="L97">		return char_name;</span>
+	}
+	public void setChar_name(String char_name) {
+<span class="fc" id="L100">		this.char_name = char_name;</span>
+<span class="fc" id="L101">	}</span>
+	public String getChar_background() {
+<span class="fc" id="L103">		return char_background;</span>
+	}
+	public void setChar_background(String char_background) {
+<span class="fc" id="L106">		this.char_background = char_background;</span>
+<span class="fc" id="L107">	}</span>
+	
+	public int getFk_player_id() {
+<span class="fc" id="L110">		return fk_player_id;</span>
+	}
+	public void setFk_player_id(int fk_player_id) {
+<span class="fc" id="L113">		this.fk_player_id = fk_player_id;</span>
+<span class="fc" id="L114">	}</span>
+
+	public boolean getAlive() {
+<span class="fc" id="L117">		return alive;</span>
+	}
+	public void setAlive(boolean alive) {
+<span class="fc" id="L120">		this.alive = alive;</span>
+<span class="fc" id="L121">	}</span>
+	public int getHP() {
+<span class="fc" id="L123">		return HP;</span>
+	}
+	public void setHP(int hP) {
+<span class="fc" id="L126">		HP = hP;</span>
+<span class="fc" id="L127">	}</span>
+	
+	public int getMP() {
+<span class="fc" id="L130">		return MP;</span>
+	}
+	public void setMP(int mP) {
+<span class="fc" id="L133">		MP = mP;</span>
+<span class="fc" id="L134">	}</span>
+	public int getAP_basic() {
+<span class="fc" id="L136">		return AP_basic;</span>
+	}
+	public void setAP_basic(int aP_basic) {
+<span class="fc" id="L139">		AP_basic = aP_basic;</span>
+<span class="fc" id="L140">	}</span>
+	public int getAP_light() {
+<span class="fc" id="L142">		return AP_light;</span>
+	}
+	public void setAP_light(int aP_light) {
+<span class="fc" id="L145">		AP_light = aP_light;</span>
+<span class="fc" id="L146">	}</span>
+	public int getAP_heavy() {
+<span class="fc" id="L148">		return AP_heavy;</span>
+	}
+	public void setAP_heavy(int aP_heavy) {
+<span class="fc" id="L151">		AP_heavy = aP_heavy;</span>
+<span class="fc" id="L152">	}</span>
+	public int getAP_magic() {
+<span class="fc" id="L154">		return AP_magic;</span>
+	}
+	public void setAP_magic(int aP_magic) {
+<span class="fc" id="L157">		AP_magic = aP_magic;</span>
+<span class="fc" id="L158">	}</span>
+	public int getXP_spent() {
+<span class="fc" id="L160">		return XP_spent;</span>
+	}
+	public void setXP_spent(int xP_spent) {
+<span class="fc" id="L163">		XP_spent = xP_spent;</span>
+<span class="fc" id="L164">	}</span>
+	public String getRace() {
+<span class="fc" id="L166">		return race;</span>
+	}
+	public void setRace(String race) {
+<span class="fc" id="L169">		this.race = race;</span>
+<span class="fc" id="L170">	}</span>
+	public String getOrigin() {
+<span class="fc" id="L172">		return origin;</span>
+	}
+	public void setOrigin(String origin) {
+<span class="fc" id="L175">		this.origin = origin;</span>
+<span class="fc" id="L176">	}</span>
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

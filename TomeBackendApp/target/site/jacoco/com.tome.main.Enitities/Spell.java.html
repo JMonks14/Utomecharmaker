@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Spell.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TomeBackendApp James Monks</a> &gt; <a href="index.source.html" class="el_package">com.tome.main.Enitities</a> &gt; <span class="el_source">Spell.java</span></div><h1>Spell.java</h1><pre class="source lang-java linenums">package com.tome.main.Enitities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=&quot;spells&quot;)
+public class Spell {
+	
+	@Id
+	@GeneratedValue
+	private int spell_id;
+	private String spell_name;
+	private int prerequisite;
+	private int mana_cost;
+	private String type;
+	private String description;
+	
+	public Spell() {
+<span class="fc" id="L22">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L24">	}</span>
+
+	public Spell(String spell_name, int prerequisite, int mana_cost, String type, String description) {
+<span class="fc" id="L27">		super();</span>
+<span class="fc" id="L28">		this.spell_name = spell_name;</span>
+<span class="fc" id="L29">		this.prerequisite = prerequisite;</span>
+<span class="fc" id="L30">		this.mana_cost = mana_cost;</span>
+<span class="fc" id="L31">		this.type = type;</span>
+<span class="fc" id="L32">		this.description = description;</span>
+<span class="fc" id="L33">	}</span>
+	
+	
+	public Spell(int spell_id, String spell_name, int prerequisite, int mana_cost, String type, String description) {
+<span class="fc" id="L37">		super();</span>
+<span class="fc" id="L38">		this.spell_id = spell_id;</span>
+<span class="fc" id="L39">		this.spell_name = spell_name;</span>
+<span class="fc" id="L40">		this.prerequisite = prerequisite;</span>
+<span class="fc" id="L41">		this.mana_cost = mana_cost;</span>
+<span class="fc" id="L42">		this.type = type;</span>
+<span class="fc" id="L43">		this.description = description;</span>
+<span class="fc" id="L44">	}</span>
+
+
+	public int getSpell_id() {
+<span class="fc" id="L48">		return spell_id;</span>
+	}
+	public void setSpell_id(int spell_id) {
+<span class="nc" id="L51">		this.spell_id = spell_id;</span>
+<span class="nc" id="L52">	}</span>
+	public String getSpell_name() {
+<span class="fc" id="L54">		return spell_name;</span>
+	}
+	public void setSpell_name(String spell_name) {
+<span class="nc" id="L57">		this.spell_name = spell_name;</span>
+<span class="nc" id="L58">	}</span>
+	public int getPrerequisite() {
+<span class="fc" id="L60">		return prerequisite;</span>
+	}
+	public void setPrerequisite(int prerequisite) {
+<span class="nc" id="L63">		this.prerequisite = prerequisite;</span>
+<span class="nc" id="L64">	}</span>
+	public int getMana_cost() {
+<span class="fc" id="L66">		return mana_cost;</span>
+	}
+	public void setMana_cost(int mana_cost) {
+<span class="nc" id="L69">		this.mana_cost = mana_cost;</span>
+<span class="nc" id="L70">	}</span>
+	public String getType() {
+<span class="fc" id="L72">		return type;</span>
+	}
+	public void setType(String type) {
+<span class="nc" id="L75">		this.type = type;</span>
+<span class="nc" id="L76">	}</span>
+	public String getDescription() {
+<span class="fc" id="L78">		return description;</span>
+	}
+	public void setDescription(String description) {
+<span class="nc" id="L81">		this.description = description;</span>
+<span class="nc" id="L82">	}</span>
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

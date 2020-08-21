@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Player.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TomeBackendApp James Monks</a> &gt; <a href="index.source.html" class="el_package">com.tome.main.Enitities</a> &gt; <span class="el_source">Player.java</span></div><h1>Player.java</h1><pre class="source lang-java linenums">package com.tome.main.Enitities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=&quot;players&quot;)
+public class Player {
+
+	@Id
+	@GeneratedValue
+	private int player_id;
+	private String first_name;
+	private String last_name;
+	private String username;
+	private String password;
+	private int activechar_id;
+	
+		public Player(String first_name, String last_name, String username, String password, int activechar_id) {
+<span class="fc" id="L22">		super();</span>
+<span class="fc" id="L23">		this.first_name = first_name;</span>
+<span class="fc" id="L24">		this.last_name = last_name;</span>
+<span class="fc" id="L25">		this.username = username;</span>
+<span class="fc" id="L26">		this.password = password;</span>
+<span class="fc" id="L27">		this.activechar_id = activechar_id;</span>
+<span class="fc" id="L28">	}</span>
+		
+		
+	public Player(int player_id, String first_name, String last_name, String username, String password,
+				int activechar_id) {
+<span class="fc" id="L33">			super();</span>
+<span class="fc" id="L34">			this.player_id = player_id;</span>
+<span class="fc" id="L35">			this.first_name = first_name;</span>
+<span class="fc" id="L36">			this.last_name = last_name;</span>
+<span class="fc" id="L37">			this.username = username;</span>
+<span class="fc" id="L38">			this.password = password;</span>
+<span class="fc" id="L39">			this.activechar_id = activechar_id;</span>
+<span class="fc" id="L40">		}</span>
+	
+	
+
+
+	public Player() {
+<span class="fc" id="L46">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L48">	}</span>
+
+
+	public int getActiveChar() {
+<span class="fc" id="L52">		return activechar_id;</span>
+	}
+	public void setActiveChar(int fk_activeChar_id) {
+<span class="fc" id="L55">		this.activechar_id = fk_activeChar_id;</span>
+<span class="fc" id="L56">	}</span>
+	public int getPlayer_id() {
+<span class="fc" id="L58">		return player_id;</span>
+	}
+	public void setPlayer_id(int player_id) {
+<span class="fc" id="L61">		this.player_id = player_id;</span>
+<span class="fc" id="L62">	}</span>
+	public String getFirst_name() {
+<span class="fc" id="L64">		return first_name;</span>
+	}
+	public void setFirst_name(String first_name) {
+<span class="fc" id="L67">		this.first_name = first_name;</span>
+<span class="fc" id="L68">	}</span>
+	public String getLast_name() {
+<span class="fc" id="L70">		return last_name;</span>
+	}
+	public void setLast_name(String last_name) {
+<span class="fc" id="L73">		this.last_name = last_name;</span>
+<span class="fc" id="L74">	}</span>
+	public String getUsername() {
+<span class="fc" id="L76">		return username;</span>
+	}
+	public void setUsername(String username) {
+<span class="fc" id="L79">		this.username = username;</span>
+<span class="fc" id="L80">	}</span>
+	public String getPassword() {
+<span class="fc" id="L82">		return password;</span>
+	}
+	public void setPassword(String password) {
+<span class="fc" id="L85">		this.password = password;</span>
+<span class="fc" id="L86">	}</span>
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

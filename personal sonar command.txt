@@ -1,0 +1,5 @@
+fb2ed8db1d5629ac57586aa1db196895cf3e40e0
+
+mvn sonar:sonar \
+  -Dsonar.host.url=http://34.89.25.198:9000 \
+  -Dsonar.login=fb2ed8db1d5629ac57586aa1db196895cf3e40e0

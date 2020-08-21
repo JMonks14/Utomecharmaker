@@ -47,7 +47,7 @@ public class BuySkills {
 	public void buyskill1() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(4000, TimeUnit.MILLISECONDS);
 		this.viewChar.getBuySkillButton().click();
-		Thread.sleep(1500);
+		Thread.sleep(3000);
 		this.buyPage.getChooseTree().click();
 		Thread.sleep(1000);
 		this.buyPage.getBodyDrop().click();
@@ -65,6 +65,7 @@ public class BuySkills {
 	public void buyskill2() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(4000, TimeUnit.MILLISECONDS);
 		this.viewChar.getBuySkillButton().click();
+		Thread.sleep(1000);
 		this.buyPage.getChooseTree().click();
 		Thread.sleep(1000);
 		this.buyPage.getBodyDrop().click();

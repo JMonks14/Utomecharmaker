@@ -1,0 +1,1 @@
+mvn deploy:deploy-file -DgeneratePom=false -DPomFile=pom.xml -Durl=http://34.105.165.77:8081/repository/maven-releases/ -Dfile=target/TomeBackendApp-1.0.0.jar -DrepositoryId=nexus -DgroupId=com.example -Dversion=1.0.0 -DartifactId=TomeBackendApp

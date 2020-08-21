@@ -1,0 +1,14 @@
+com\tome\main\ControllerTests\CharSkillControllerTests.class
+com\tome\main\ControllerTests\PlayerContollerTest.class
+com\tome\main\ControllerTests\CharSpellControllerTest.class
+com\tome\main\ServiceTests\HeadRefServices.class
+com\tome\main\ServiceTests\SkillServiceTest.class
+com\tome\main\ServiceTests\CharacterServiceTest.class
+com\tome\main\ControllerTests\CharacterControllerTests.class
+com\tome\main\ControllerTests\SkillControllerTest.class
+com\tome\main\ControllerTests\SpellControllerTests.class
+com\tome\main\ServiceTests\PlayerServiceTest.class
+com\tome\main\ServiceTests\CharSkillServicesTest.class
+com\tome\main\ServiceTests\SpellServiceTest.class
+com\tome\main\ServiceTests\CharSpellServiceTest.class
+com\tome\main\TomeBackendAppApplicationTests.class
