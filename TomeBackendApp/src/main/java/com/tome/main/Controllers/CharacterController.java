@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tome.main.Enitities.Characters;
+import com.tome.main.Enitities.Skill;
 import com.tome.main.Services.CharacterServices;
 
 @RestController
@@ -32,6 +34,12 @@ public class CharacterController {
 	public Characters view(@PathVariable int id) { 
 		return this.service.viewById(id);
 	}
+	
+//	@PutMapping("/buyskill/{id}")
+//	public ResponseEntity<Characters> buySkill(@RequestBody Skill skill, @PathVariable int id){
+//		Characters updated = this.service.buySkill(skill, id);
+//		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
+//	}
 	
 	@PostMapping("/kill/{id}")
 	public ResponseEntity<Characters> kill(@PathVariable int id) {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.tome.main.Enitities.Characters;
 import com.tome.main.Enitities.Player;
+import com.tome.main.Enitities.Skill;
 import com.tome.main.Exceptions.CharacterNotFoundException;
 import com.tome.main.Repos.CharacterRepo;
 
@@ -18,7 +19,7 @@ public class CharacterServices {
 	PlayerServices playerservice;
 	
 	public Characters create(Characters Char) {
-		Player player = this.playerservice.viewById(Char.getFk_player_id());
+		Player player = this.playerservice.viewById(Char.getPlayer().getPlayer_id());
 		Characters saved = this.repo.save(Char);
 		player.setActiveChar(saved.getChar_id());
 		this.playerservice.update(player, player.getPlayer_id());
@@ -29,6 +30,12 @@ public class CharacterServices {
 		Characters found = this.repo.findById(id).orElseThrow(CharacterNotFoundException::new);
 		return found;
 	}
+	
+//	public Characters buySkill(Skill skill, int charId) {
+//		Characters Char = viewById(charId);
+//		Char.getSkills().add(skill);
+//		return this.update(Char, charId);
+//	}
 	
 	public Characters update(Characters newChar, int id) {
 		try {
@@ -41,6 +48,8 @@ public class CharacterServices {
 		Char.setMP(newChar.getMP());
 		Char.setAlive(newChar.getAlive());
 		Char.setXP_spent(newChar.getXP_spent());
+		Char.setSkills(newChar.getSkills());
+		Char.setSpells(newChar.getSpells());
 		return this.repo.save(Char);
 		
 		}
@@ -52,7 +61,7 @@ public class CharacterServices {
 	public Characters kill(int id) {
 		Characters dead = viewById(id);
 		dead.setAlive(false);
-		Player player = this.playerservice.viewById(dead.getFk_player_id());
+		Player player = this.playerservice.viewById(dead.getPlayer().getPlayer_id());
 		player.setActiveChar(0);
 		this.playerservice.update(player, player.getPlayer_id());
 		return this.update(dead, id);

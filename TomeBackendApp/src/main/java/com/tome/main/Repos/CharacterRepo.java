@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.tome.main.Enitities.Characters;
 @Repository
-public interface CharacterRepo extends JpaRepository<Characters, Integer>{
-	
-	
+public interface CharacterRepo extends JpaRepository<Characters, Integer>{	
 
 }

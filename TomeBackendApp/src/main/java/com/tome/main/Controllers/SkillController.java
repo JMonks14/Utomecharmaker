@@ -3,12 +3,18 @@ package com.tome.main.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tome.main.Enitities.Player;
 import com.tome.main.Enitities.Skill;
 import com.tome.main.Services.SkillServices;
 
@@ -30,9 +36,21 @@ public class SkillController {
 		return this.service.findById(id);
 	}
 	
-	@GetMapping(value="/findbychar/{id}")
-	public List<Skill> getCharSkills(@PathVariable int id) {
-		return this.service.getCharSkills(id);
+	@PostMapping(value = "/create")
+	public ResponseEntity<Skill> create(@RequestBody Skill skill) {
+		Skill newSkill = service.create(skill);
+		return new ResponseEntity<>(newSkill, HttpStatus.CREATED);
 	}
+	
+	@PutMapping(value = "/buyskill")
+	public ResponseEntity<Skill> buy(@RequestBody Skill skill) {
+		Skill upSkill = service.buy(skill);
+		return new ResponseEntity<>(upSkill, HttpStatus.ACCEPTED);
+	}
+	
+//	@GetMapping(value="/findbychar/{id}")
+//	public List<Skill> getCharSkills(@PathVariable int id) {
+//		return this.service.getCharSkills(id);
+//	}
 
 }

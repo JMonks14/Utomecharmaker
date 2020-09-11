@@ -1,9 +1,18 @@
 package com.tome.main.Enitities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -15,6 +24,8 @@ public class Skill {
 	private int skill_id;
 	private String skill_name;
 	private String description;
+	
+	
 	private int fk_tree_id;
 	private int prerequisite_1;
 	private int prerequisite_2;
@@ -23,10 +34,12 @@ public class Skill {
 	private int prerequisite_5;
 	private boolean is_multibuy;
 	
-//	@ManyToMany(mappedBy = "skills")
-//	Set<Characters> characters;
-	
-	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="char_skills",
+	inverseJoinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
+	joinColumns = @JoinColumn(name = "fk_skill_id", referencedColumnName="skill_id"))
+	@JsonIgnore
+	private List<Characters> skillchars;
 	
 	public int getSkill_id() {
 		return skill_id;
@@ -64,11 +77,18 @@ public class Skill {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public int getFk_tree_id() {
 		return fk_tree_id;
 	}
 	public void setFk_tree_id(int fk_tree_id) {
 		this.fk_tree_id = fk_tree_id;
+	}
+	public List<Characters> getSkillchars() {
+		return skillchars;
+	}
+	public void setSkillchars(List<Characters> skillchars) {
+		this.skillchars = skillchars;
 	}
 	public int getPrerequisite_1() {
 		return prerequisite_1;

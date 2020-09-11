@@ -1,9 +1,17 @@
 package com.tome.main.Enitities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="spells")
@@ -17,6 +25,14 @@ public class Spell {
 	private int mana_cost;
 	private String type;
 	private String description;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="char_spells",
+	inverseJoinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
+	joinColumns = @JoinColumn(name = "fk_spell_id", referencedColumnName="spell_id"))
+	@JsonIgnore
+	private List<Characters> spellchars;
+	
 	
 	public Spell() {
 		super();
@@ -79,6 +95,14 @@ public class Spell {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Characters> getSpellchars() {
+		return spellchars;
+	}
+
+	public void setSpellchars(List<Characters> spellchars) {
+		this.spellchars = spellchars;
 	}
 	
 	

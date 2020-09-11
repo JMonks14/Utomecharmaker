@@ -23,8 +23,14 @@ public class SkillServices {
 		return this.repo.findById(id).orElseThrow(SkillNotFoundException::new);
 	}
 	
-	public List<Skill> getCharSkills(int char_id) {
-		return this.repo.getCharSkills(char_id);
+	public Skill create(Skill skill) {
+		return this.repo.save(skill);
 	}
-
+	
+	public Skill buy(Skill bought) {
+		Skill skill = findById(bought.getSkill_id());
+		skill.setSkillchars(bought.getSkillchars());
+		return this.repo.save(skill);
+	}
+	
 }

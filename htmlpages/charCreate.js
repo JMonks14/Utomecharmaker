@@ -4,29 +4,43 @@ if(!(Pid)) window.location.href="login.html";
 document.querySelector("#charcreate").addEventListener("submit", function(a) {
     a.preventDefault()
 
-    let v = document.querySelector("#charcreate").elements
+    fetch(`http://localhost:8010/player/view/${Pid}`)
+    .then(
+    function(response) {
+        if (response.status!==200) {
+            console.log("There was a problem, status code " + response.status);
+            return;
+        }
+        response.json().then(function(data) {
+            console.log(data);
+            let v = document.querySelector("#charcreate").elements
 
-    let name = v["charnameinput"].value
-    let race = v["chooserace"].value
-    let origin = v["regionselect"].value
-    let bg = v["backgroundentry"].value
+            let name = v["charnameinput"].value
+            let race = v["chooserace"].value
+            let origin = v["regionselect"].value
+            let bg = v["backgroundentry"].value
 
-    const newChar = {
-        "char_name": name,
-        "race": race,
-        "origin": origin,
-        "char_background": bg,
-        "fk_player_id": sessionStorage.getItem("Pid"),
-        "alive": 1,
-        "hp": 3,
-        "mp": 3,
-        "ap_basic": 1         
+            const newChar = {
+                "char_name": name,
+                "race": race,
+                "origin": origin,
+                "char_background": bg,
+                "player": data,
+                "alive": 1,
+                "hp": 3,
+                "mp": 3,
+                "ap_basic": 1         
     }
     if (name==="") {
         window.alert("Character name cannot be blank")
     } else {
         saveChar(newChar)
     }
+        })}).catch(function(error) {
+            console.log("Request failed", error);
+        })
+
+    
     
 })
 

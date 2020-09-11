@@ -1,8 +1,11 @@
 package com.tome.main.Enitities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class Player {
 	private String username;
 	private String password;
 	private int activechar_id;
+	
+	@OneToMany(mappedBy = "player")
+	private List<Characters> characters;
 	
 		public Player(String first_name, String last_name, String username, String password, int activechar_id) {
 		super();
