@@ -2,11 +2,13 @@ package com.tome.main.Enitities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,10 +29,16 @@ public class Characters {
 	@JoinColumn(name="fk_player_id")
 	private Player player;
 	
-	@ManyToMany(mappedBy="skillchars")
+	@ManyToMany
+	@JoinTable(name="char_skills",
+	joinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
+	inverseJoinColumns = @JoinColumn(name = "fk_skill_id", referencedColumnName="skill_id"))
 	private List<Skill> skills;
 	
-	@ManyToMany(mappedBy="spellchars")
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="char_spells",
+	joinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
+	inverseJoinColumns = @JoinColumn(name = "fk_spell_id", referencedColumnName="spell_id"))
 	private List<Spell> spells;
 	
 	private boolean alive;

@@ -31,12 +31,6 @@ public class CharacterServices {
 		return found;
 	}
 	
-//	public Characters buySkill(Skill skill, int charId) {
-//		Characters Char = viewById(charId);
-//		Char.getSkills().add(skill);
-//		return this.update(Char, charId);
-//	}
-	
 	public Characters update(Characters newChar, int id) {
 		try {
 			Characters Char = viewById(id);

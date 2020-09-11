@@ -26,10 +26,8 @@ public class Spell {
 	private String type;
 	private String description;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="char_spells",
-	inverseJoinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
-	joinColumns = @JoinColumn(name = "fk_spell_id", referencedColumnName="spell_id"))
+	
+	@ManyToMany(mappedBy="spells")
 	@JsonIgnore
 	private List<Characters> spellchars;
 	

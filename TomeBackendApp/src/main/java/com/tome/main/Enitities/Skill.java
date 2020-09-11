@@ -34,10 +34,8 @@ public class Skill {
 	private int prerequisite_5;
 	private boolean is_multibuy;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="char_skills",
-	inverseJoinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
-	joinColumns = @JoinColumn(name = "fk_skill_id", referencedColumnName="skill_id"))
+	
+	@ManyToMany(mappedBy="skills")
 	@JsonIgnore
 	private List<Characters> skillchars;
 	

@@ -35,18 +35,13 @@ public class CharacterController {
 		return this.service.viewById(id);
 	}
 	
-//	@PutMapping("/buyskill/{id}")
-//	public ResponseEntity<Characters> buySkill(@RequestBody Skill skill, @PathVariable int id){
-//		Characters updated = this.service.buySkill(skill, id);
-//		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
-//	}
 	
 	@PostMapping("/kill/{id}")
 	public ResponseEntity<Characters> kill(@PathVariable int id) {
 		Characters killed = this.service.kill(id);
 		return new ResponseEntity<>(killed, HttpStatus.ACCEPTED);
 	}
-	@PostMapping("/update/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<Characters> update(@RequestBody Characters newChar, @PathVariable int id) {
 		Characters updated = this.service.update(newChar, id);
 		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
