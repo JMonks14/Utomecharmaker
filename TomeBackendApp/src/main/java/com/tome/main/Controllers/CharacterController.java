@@ -36,7 +36,7 @@ public class CharacterController {
 	}
 	
 	
-	@PostMapping("/kill/{id}")
+	@PutMapping("/kill/{id}")
 	public ResponseEntity<Characters> kill(@PathVariable int id) {
 		Characters killed = this.service.kill(id);
 		return new ResponseEntity<>(killed, HttpStatus.ACCEPTED);
