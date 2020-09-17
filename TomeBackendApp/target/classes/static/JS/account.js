@@ -3,7 +3,7 @@ let name =""
 let username=""
 var player = {
 }
-let Pid=parseInt(sessionStorage.getItem("Pid"))
+let Pid=255
 // if(!(Pid)) window.location.href="login.html";
 //fetches user info and writes to page
 fetch(`http://localhost:8010/player/view/${Pid}`)
@@ -111,7 +111,7 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
 //function which sends update info
 function playernameUp(data) {
 
-    fetch(`http://localhost:8010/player/update/${Pid}`, {
+    fetch(`http://localhost:8010/player/update/255`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -121,7 +121,7 @@ function playernameUp(data) {
     }).then(response => response)
     .then(function (data) {
         console.log("Request succeeded with JSON response",data);
-        location.reload()
+//        location.reload()
     }).catch(function(error) {
         console.log("Request failed", error);
     })
@@ -214,8 +214,3 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
     
 })
 }
-document.querySelector("#logoutbutton").addEventListener("click", (o) => {
-    o.preventDefault
-    sessionStorage.clear()
-    window.location.href="/"
-})

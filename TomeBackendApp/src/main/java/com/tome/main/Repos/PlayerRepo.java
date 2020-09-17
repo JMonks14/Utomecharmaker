@@ -16,4 +16,6 @@ public interface PlayerRepo extends JpaRepository<Player, Integer> {
 	
 	public Optional<Player> findByUsername(String username);
 
+	public Optional<Player> findByEmail(String email);
+
 }

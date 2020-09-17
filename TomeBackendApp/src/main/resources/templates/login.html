@@ -35,16 +35,16 @@
             <div class="row">
               <div class="col-md">
                 <h2>Login</h2>
-                <form id="loginform">
-              <div class="form-group">
+                <form id="loginform" name='f' th:action="@{/login}" method="POST">
+              <div class="form-group" >
                   <label for="usernamelogin">Username</label>
-                  <input type="text" class="form-control" id="usernamelogin">
+                  <input type="text" class="form-control" id="usernamelogin" name="username" value=''>
               </div>
               <div class="form-group">
                   <label for="passwordlogin">Password</label>
-                  <input type="password" class="form-control" id="passwordlogin">
+                  <input type="password" class="form-control" id="passwordlogin" name="password">
               </div>
-              <button id="loginbutton" type="submit" class="btn btn-primary">Login</button>
+              <button id="loginbutton" type="submit" class="btn btn-primary" value="submit">Login</button>
             </form>
             <br><br><br>
           
@@ -64,6 +64,10 @@
                         <label for="usernameregister">Username</label>
                         <input type="text" class="form-control" id="usernameregister">
                     </div>
+                    <div class="form-group">
+                      <label for="emailreg">Email address</label>
+                      <input type="email" class="form-control" id="emailreg">
+                  </div>
                     <div class="form-group">
                         <label for="Passwordregister">Password</label>
                         <input type="password" class="form-control" id="Passwordregister">

@@ -15,6 +15,10 @@ public class PageController {
 	public String loginPage() {
 		return "login";
 	}
+	@RequestMapping(value="/loginfail")
+	public String loginFail() {
+		return "loginFail";
+	}
 	
 	@RequestMapping(value = "/accounthome")
 	public String accountHome() {
