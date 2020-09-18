@@ -1,5 +1,5 @@
-// let Pid=parseInt(sessionStorage.getItem("Pid"))
-// if(!(Pid)) window.location.href="login.html";
+let Pid=parseInt(sessionStorage.getItem("Pid"))
+if(!(Pid)) window.location.href="login.html";
 
 document.querySelector("#charcreate").addEventListener("submit", function(a) {
     a.preventDefault()

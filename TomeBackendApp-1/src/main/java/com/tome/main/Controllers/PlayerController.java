@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tome.main.Enitities.Player;
+import com.tome.main.Exceptions.PlayerAlreadyExistsException;
 import com.tome.main.Services.PlayerServices;
 
 @RestController
@@ -26,9 +27,13 @@ public class PlayerController {
 	PlayerServices service;
 	
 	@PostMapping("/reg")
-	public ResponseEntity<Player> register(@RequestBody Player player) {
-		Player saved = this.service.create(player);
-		return new ResponseEntity<>(saved, HttpStatus.CREATED);
+	public ResponseEntity<String> register(@RequestBody Player player) {
+		try {
+			this.service.create(player);
+			return new ResponseEntity<>("Account Successfully Created", HttpStatus.CREATED);
+		} catch (PlayerAlreadyExistsException ex){
+			return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);
+		}
 	}
 	
 	@GetMapping("/current")

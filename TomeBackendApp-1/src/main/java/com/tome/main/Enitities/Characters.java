@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="characters")
 public class Characters {
@@ -25,6 +27,7 @@ public class Characters {
 	private String origin;
 	private String char_background;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="fk_player_id")
 	private Player player;

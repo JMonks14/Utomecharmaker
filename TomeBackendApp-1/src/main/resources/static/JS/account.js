@@ -1,12 +1,5 @@
-let id =""
-let name =""
-let username=""
-var player = {
-}
-let Pid=255
-// if(!(Pid)) window.location.href="login.html";
-//fetches user info and writes to page
-fetch(`http://localhost:8010/player/view/${Pid}`)
+function findbyUsername(Username) {
+fetch(`http://localhost:8010/player/find/${Username}`)
 .then(
     function(response) {
         if (response.status!==200) {
@@ -14,16 +7,13 @@ fetch(`http://localhost:8010/player/view/${Pid}`)
             return;
         }
         response.json().then(function(data) {
-            id = data.player_id
-            name = data.first_name + " " + data.last_name
-            username = data.username
+            console.log(data);
+            let id = data.player_id
+            let name = data.first_name + " " + data.last_name
+            let username = data.username
+            sessionStorage.setItem("Pid",id)
 
             passwordUpLoad(data)
-            
-
-            console.log(id);
-            console.log(name);
-            console.log(username);
 
             document.getElementById("idpara").innerHTML+=id;
             document.getElementById("namepara").innerHTML+=name;
@@ -62,8 +52,13 @@ fetch(`http://localhost:8010/player/view/${Pid}`)
                         a.preventDefault()
                         window.location.href="viewchar"
                         })
-                 })})}})})
-
+                 })}).catch(function(error) {
+                    console.log("Request failed", error);
+                })
+                }})}).catch(function(error) {
+                    console.log("Request failed", error);
+                })
+                }
 
 //brings up name update form when button clicked
 document.querySelector("#updatenamebutton").addEventListener("click", function(upName) {
@@ -222,8 +217,10 @@ fetch(`http://localhost:8010/player/current`)
             return;
         }
         response.text().then(function(data) {
-            console.log(data);
-        })
+            findbyUsername(data);
+        }).catch(function(error) {
+            console.log("Request failed", error);
+    })
         }).catch(function(error) {
             console.log("Request failed", error);
     })

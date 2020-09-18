@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tome.main.Enitities.Player;
+import com.tome.main.Exceptions.PlayerAlreadyExistsException;
 import com.tome.main.Exceptions.PlayerNotFoundException;
 import com.tome.main.Repos.PlayerRepo;
 
@@ -27,7 +28,19 @@ public class PlayerServices {
         return repo.findByEmail(email).isPresent();
     }
 	
+	private boolean usernameExists(final String username) {
+        return repo.findByUsername(username).isPresent();
+    }
+	
 	public Player create(Player player) {
+		
+		if (emailExists(player.getEmail())) {
+			throw new PlayerAlreadyExistsException("Registration Failed: The email address you entered is already in use");
+		}
+		if (usernameExists(player.getUsername())) {
+			throw new PlayerAlreadyExistsException("Registration Failed: The username you entered is already in use");
+		}
+		
 		player.setPassword(encoder.encode(player.getPassword()));
 		player.setRole("ROLE_USER");
 		player.setActiveChar(0);

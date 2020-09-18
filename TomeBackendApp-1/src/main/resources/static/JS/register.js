@@ -1,6 +1,3 @@
-// let Pid = sessionStorage.getItem("Pid")
-// if (Pid) window.location.href="Account.html";
-
 document.querySelector("#playerreg").addEventListener("submit",function(e) {
     e.preventDefault();
     let x = document.querySelector("#playerreg").elements;
@@ -12,21 +9,17 @@ document.querySelector("#playerreg").addEventListener("submit",function(e) {
     let password= x["Passwordregister"].value;
     let password2= x["confirmPasswordregister"].value;
 
-    if (first_name==="" || last_name==="" || username==="" || password==="") {
-        window.alert("Registration failed: All fields must contain characters")} 
-    else if (password != password2) {
-        window.alert("Registration failed: passwords must match")
+    if (password != password2) {
+        window.alert("Registration failed: passwords do not match")
     } else {
         const data = {
             "first_name": first_name,
             "last_name": last_name,
             "username": username,
             "password": password,
-            // "mathchingPassword":password2,
             "email": email
         }
         playerReg(data)
-        // window.location.href="Account.html"
     }
   });
 
@@ -44,13 +37,12 @@ function playerReg(data) {
             window.alert(response)
             return;
         }
-        response.json().then((data) => {
-            console.log("Request succeeded with JSON response",data);
+        response.text().then((data) => {
+            window.alert(data);
         })
     })
     
-    .then().catch(function(error) {
+    .catch(function(error) {
         console.log("Request failed", error);
     })
-
 }
