@@ -1,5 +1,7 @@
 package com.tome.main.Controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tome.main.Enitities.Player;
@@ -28,6 +31,11 @@ public class PlayerController {
 		return new ResponseEntity<>(saved, HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/current")
+	@ResponseBody
+	public String getCurrentUser(Principal principal) {
+		return principal.getName();
+	}
 	
 	@GetMapping("/view/{id}")
 	public Player view(@PathVariable int id) { 
