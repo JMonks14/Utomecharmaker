@@ -1,6 +1,3 @@
-// let Pid=parseInt(sessionStorage.getItem("Pid"))
-// if(!(Pid)) window.location.href="login.html";
-
 let Cid = sessionStorage.getItem("Cid")
 fetch(`http://localhost:8010/character/view/${Cid}`)
                .then(
@@ -10,7 +7,6 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                      return;
                      }
                      response.json().then(function(data) {
-                         console.log(data);
                         let name = data.char_name
                         document.getElementById("namespace").innerHTML+=name;
                         let bg = data.char_background
@@ -44,17 +40,15 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                                 "description": data.skills[i].description
                             })                
                         }
-                        console.log(skillsArr);
                         for (x=0;x<skillsArr.length;x++) {
-                        for (y=parseInt(x+1); y<skillsArr.length; y++) {
-                    
-                        if (skillsArr[x].name===skillsArr[y].name) {
-                            skillsArr[x].times_bought+=1
-                            skillsArr.splice(y,1)
-                            y=parseInt(x)
+                            for (y=parseInt(x+1); y<skillsArr.length; y++) {
+                                if (skillsArr[x].name===skillsArr[y].name) {
+                                    skillsArr[x].times_bought+=1
+                                    skillsArr.splice(y,1)
+                                    y=parseInt(x)
+                                    }
+                                }
                             }
-                        }
-                        }
                         for (s in skillsArr) {
                             document.getElementById("skilltable").innerHTML+=`<th scope="row" class="tabletxt">${skillsArr[s].name}</th>
                             <td class="tabletxt">${skillsArr[s].times_bought}</td>

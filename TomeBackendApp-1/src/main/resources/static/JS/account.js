@@ -7,7 +7,6 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             return;
         }
         response.json().then(function(data) {
-            console.log(data);
             let id = data.player_id
             let name = data.first_name + " " + data.last_name
             let username = data.username
@@ -18,10 +17,7 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             document.getElementById("idpara").innerHTML+=id;
             document.getElementById("namepara").innerHTML+=name;
             document.getElementById("usernamepara").innerHTML+=username;
-            // console.log("====================");
-            // console.log(player);
-            // console.log("====================");
-            //brings up character name or create character button if none exists
+            
             if (data.activeChar===0) {
                 document.getElementById("charnamespace").innerHTML+="You do not have an active character at present.";
             document.getElementById("charcbuttspace").innerHTML+=`<button id="createcharbutton" type="button" class="btn btn-primary">Create Character</button>`;
@@ -47,7 +43,6 @@ fetch(`http://localhost:8010/player/find/${Username}`)
                     console.log(name);            
                     document.getElementById("charnamespace").innerHTML+=name;
                     document.getElementById("charcbuttspace").innerHTML+=`<button id="viewcharbutton" type="button" class="btn btn-primary">View Character</button>`;
-                    // document.getElementById("rcharbuttspace").innerHTML+=`<button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character</button>`;
                     document.querySelector("#viewcharbutton").addEventListener("click", function(a) {
                         a.preventDefault()
                         window.location.href="viewchar"
@@ -106,7 +101,7 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
 //function which sends update info
 function playernameUp(data) {
 
-    fetch(`http://localhost:8010/player/update/255`, {
+    fetch(`http://localhost:8010/player/update/${sessionStorage.getItem("Pid")}`, {
         method: "POST",
         mode: "cors",
         headers: {
