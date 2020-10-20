@@ -40,6 +40,11 @@ public class PageController {
 		return "spendXP";
 	}
 	
+	@RequestMapping(value = "/resetpassword")
+	public String resetPw() {
+		return "forgotpassword";
+	}
+	
 	
 
 }

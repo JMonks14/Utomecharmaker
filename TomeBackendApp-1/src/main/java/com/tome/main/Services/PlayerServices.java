@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tome.main.Enitities.PasswordResetToken;
 import com.tome.main.Enitities.Player;
 import com.tome.main.Exceptions.PlayerAlreadyExistsException;
 import com.tome.main.Exceptions.PlayerNotFoundException;
+import com.tome.main.Repos.PasswordResetTokenRepository;
 import com.tome.main.Repos.PlayerRepo;
 
 
@@ -18,6 +20,9 @@ public class PlayerServices {
 	
 	@Autowired
 	PasswordEncoder encoder;
+	
+	@Autowired
+	PasswordResetTokenRepository tokenRepo;
 	
 	public PlayerServices(PlayerRepo repo) {
 		super();
@@ -80,5 +85,14 @@ public class PlayerServices {
 	public Player findByUsername(String username) {
 		return this.repo.findByUsername(username).orElseThrow(PlayerNotFoundException::new);
 	}
+
+	public Player findUserByEmail(String userEmail) {
+		return this.repo.findByEmail(userEmail).orElseThrow(PlayerNotFoundException::new);
+	}
+	
+	public void createPasswordResetTokenForUser(final Player player, final String token) {
+        final PasswordResetToken myToken = new PasswordResetToken(token, player);
+        tokenRepo.save(myToken);
+    }
 
 }
