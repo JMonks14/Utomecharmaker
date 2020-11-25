@@ -77,7 +77,7 @@ fetch(`http://localhost:8010/skills/listbytree/${tree_id}`)
 //filters skills buy which ones the player's character has available
 function getCharSkills(inskills) {
   let skills=inskills
-    fetch(`http://localhost:8010/charskills/byid/${sessionStorage.getItem("Cid")}`)
+    fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -86,25 +86,25 @@ function getCharSkills(inskills) {
           }                       
           response.json().then(function(data) {
             // console.log(data);
-            let char_skills=[]                      
-            console.log(data);
+            let char_skills=data.skills                      
+            let char_skillIds =[]
             
-            console.log(skills);
-          for (let x=0; x < data.length; x++){
-            let char_skill=data[x].fk_skill_id
-            console.log(char_skill);
-            char_skills.push(char_skill)
+            
+          for (let x=0; x < char_skills.length; x++){
+            let char_skillId=char_skills[x].skill_id
+            console.log(char_skillId);
+            char_skillIds.push(char_skillId)
           }
-          console.log(char_skills);
+          console.log(char_skillIds);
           console.log(skills);
             for (let i =0; i<skills.length;i++) {
               let skill=skills[i]
               if(skill.prerequisite_1!=0) {
-                if(!(char_skills.includes(skill.prerequisite_1) || char_skills.includes(skill.prerequisite_2) || char_skills.includes(skill.prerequisite_3) || char_skills.includes(skill.prerequisite_4) || char_skills.includes(skill.prerequisite_5))) {
+                if(!(char_skillIds.includes(skill.prerequisite_1) || char_skillIds.includes(skill.prerequisite_2) || char_skillIds.includes(skill.prerequisite_3) || char_skillIds.includes(skill.prerequisite_4) || char_skillIds.includes(skill.prerequisite_5))) {
                   continue
                 }
               }
-              if (char_skills.includes(skill.skill_id) && skill.is_multibuy===false) continue;
+              if (char_skillIds.includes(skill.skill_id) && skill.is_multibuy===false) continue;
 
               let formoption = `<button id="skillget_${skills[i].skill_id}" onclick="loadSkill(${skills[i].skill_id})" class="dropdown-item" type="button">${skills[i].skill_name}</button>`
               document.getElementById("chooseskill").innerHTML+=formoption;
@@ -143,7 +143,7 @@ function loadSkill(n) {
               document.getElementById("buybuttspace").innerHTML=`<button id="confirmbuy" type="button" class="btn btn-primary">Confirm Skill Purchase</button>`
               document.querySelector("#confirmbuy").addEventListener("click",function(b) {
                 b.preventDefault
-                buySkill(n)                            
+                buySkill(data)                            
               })
             }
          })  
@@ -172,7 +172,7 @@ function getSpells() {
 //filters spells to display only those available to the player
 function getCharSpells(inspells) {
   let spells=inspells
-    fetch(`http://localhost:8010/charspell/byid/${sessionStorage.getItem("Cid")}`)
+    fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -183,9 +183,10 @@ function getCharSpells(inspells) {
             // console.log(data);
             let char_spells=[]                      
             console.log(data);
+            let charSpells=data.spells
                       
-          for (let x=0; x < data.length; x++){
-            let char_spell=data[x].fk_spell_id
+          for (let x=0; x < charSpells.length; x++){
+            let char_spell=charSpells[x].spell_id
             console.log(char_spell);
             char_spells.push(char_spell)
           }
@@ -232,104 +233,89 @@ function loadSpell(n) {
             document.getElementById("buybuttspace").innerHTML=`<button id="confirmspellbuy" type="button" class="btn btn-primary">Confirm Skill Purchase</button>`
               document.querySelector("#confirmspellbuy").addEventListener("click",function(b) {
                 b.preventDefault
-                buySpell(data.spell_id)
+                buySpell(data)
               })
     })}).catch(function(err) {
       console.log('Fetch Error :-S', err);
     });}
-    //saves the skill as belonging to user's character
-    function buySkill(n) {
-      const buy = {
-        "fk_char_id": sessionStorage.getItem("Cid"),
-        "fk_skill_id": n
-      }
-      fetch("http://localhost:8010/charskills/buy", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(buy)
-      }).then(response => response)
-      .then(function(data) {
-      console.log("Request succeeded with JSON response",data);       
-      })
-      .then(getChar(n))                
-      .catch(function(err) {
-      console.log('Fetch Error :-S', err);
-    });
+    //calls the character from the database and updates the relevant fields
+function buySkill(skill) {
+      let n = skill.skill_id
+      fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
+          .then(function(response) {
+              if (response.status!==200) {
+                  console.log("There was a problem, status code " + response.status);
+                  return;
+              }
+              response.json().then(function(data) {
+                let char = data
+                char.skills.push(skill);
+                console.log(char);
+                let APL2=[9,12]
+                let APL4=6
+                let APH2=[10,13]
+                let APH4=7
+                let HP=[15,17,19,21]
+                let MP1=[32,34,35]
+                let MP3=36
+                let APM2=[37,38]
+                char.xp_spent+=1
+                if (APL2.includes(n)) char.ap_light+=2;
+                if (APL4===n) char.ap_light+=4;
+                if (APH2.includes(n)) char.ap_heavy+=2;
+                if (APH4===n) char.ap_heavy+=8;
+                if (HP.includes(n)) char.hp+=1;
+                if (MP1.includes(n)) char.mp+=1;
+                if (MP3===n) char.mp+=3;
+                if (APM2.includes(n)) char.ap_magic+=2;
+                console.log((char));
+                updateChar(char)
+                // console.log(data);                               
+              })}).catch(function(error) {
+                    console.log("Request failed", error);
+                })
+      
     }
     //saves spell as belonging to user's character
-function buySpell(n) {
-      const buy = {
-        "fk_char_id": sessionStorage.getItem("Cid"),
-        "fk_spell_id": n
+function buySpell(spell) {
+      
+  fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
+  .then(function(response) {
+      if (response.status!==200) {
+          console.log("There was a problem, status code " + response.status);
+          return;
       }
-      fetch("http://localhost:8010/charspell/buy", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(buy)
-      }).then(response => response)
-      .then(function(data) {
-      console.log("Request succeeded with JSON response",data);       
-      })
-      .then(() => {
-        if(n===6 || n===9) {
+      response.json().then(function(data) {
+          let n=spell.spell_id
+          let char = data
+          char.spells.push(spell)
+          
+        if(n===6 || n ===9) {
           n++
-          buySpell(n)
-        } else{
-        buySkill(31)
-        }})
-                
-      .catch(function(err) {
-      console.log('Fetch Error :-S', err);
-    });
-    }
-    //retrieves user's character info from database
-function getChar(n) {
-      let Cid = sessionStorage.getItem("Cid")
-      fetch(`http://localhost:8010/character/view/${Cid}`)
-                   .then(
-                         function(response) {
-                         if (response.status!==200) {
-                         console.log("There was a problem, status code " + response.status);
-                         return;
-                         }
-                         response.json().then(function(data) {
-                           let char = data
-                           console.log(char);
-                           let APL2=[9,12]
-                           let APL4=6
-                           let APH2=[10,13]
-                           let APH4=7
-                           let HP=[15,17,19,21]
-                           let MP1=[32,34,35]
-                           let MP3=36
-                           let APM2=[37,38]
-                           char.xp_spent+=1
-                           if (APL2.includes(n)) char.ap_light+=2;
-                           if (APL4===n) char.ap_light+=4;
-                           if (APH2.includes(n)) char.ap_heavy+=2;
-                           if (APH4===n) char.ap_heavy+=8;
-                           if (HP.includes(n)) char.hp+=1;
-                           if (MP1.includes(n)) char.mp+=1;
-                           if (MP3===n) char.mp+=3;
-                           if (APM2.includes(n)) char.ap_magic+=2;
-                           console.log((char));
-                           updateChar(char)
-                         }
-                         
-                         )})
-                         .catch(function(err) {
-                          console.log('Fetch Error :-S', err);
-                        })}
-    //updates relevant values and save character back to database
+          fetch(`http://localhost:8010/spell/find/${n}`)
+          .then((response) => {
+            if (response.status!==200) {
+              console.log("There was a problem, status code " + response.status);
+              return;
+            }
+            response.json().then(function(data){
+              let mass =data
+              char.spells.push(mass)
+              console.log(char);
+              buyCantrips(char)
+            }).catch(function(err) {
+              console.log('Fetch Error :-S', err);
+            })})
+          } else {
+            buyCantrips(char)
+          } 
+          
+  })
+})}
+    //saves character back to database
 function updateChar(char) {
       fetch(`http://localhost:8010/character/update/${char.char_id}`, {
-            method: "POST",
+            method: "PUT",
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
@@ -344,3 +330,24 @@ function updateChar(char) {
             console.log("Request failed", error);
         })
     }
+function buyCantrips(char) {
+  char.xp_spent++
+  fetch(`http://localhost:8010/skills/findbyid/${31}`)
+          .then(function(response) {
+              if (response.status !== 200) {
+                  console.log('Looks like there was a problem. Status Code: ' +
+                    response.status);
+                  return;
+                }
+                response.json().then(function(data) {
+                  char.skills.push(data)
+                  updateChar(char)
+                })
+                .catch(function(err) {
+                  console.log('Fetch Error :-S', err);
+                })   
+        })   
+      .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
+}

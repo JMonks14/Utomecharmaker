@@ -22,11 +22,12 @@ public class PlayerController {
 	@Autowired
 	PlayerServices service;
 	
-	@PostMapping("/register")
-	public ResponseEntity<Player> create(@RequestBody Player player) {
-		Player registered = service.create(player);
-		return new ResponseEntity<>(registered, HttpStatus.CREATED);
+	@PostMapping("/reg")
+	public ResponseEntity<Player> register(@RequestBody Player player) {
+		Player saved = this.service.create(player);
+		return new ResponseEntity<>(saved, HttpStatus.CREATED);
 	}
+	
 	
 	@GetMapping("/view/{id}")
 	public Player view(@PathVariable int id) { 

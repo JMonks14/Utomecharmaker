@@ -1,13 +1,16 @@
 package com.tome.main.Enitities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="players")
-public class Player {
+public class Player{
 
 	@Id
 	@GeneratedValue
@@ -17,6 +20,39 @@ public class Player {
 	private String username;
 	private String password;
 	private int activechar_id;
+	private String role;
+	private String email;
+	
+	public int getActivechar_id() {
+		return activechar_id;
+	}
+
+
+	public void setActivechar_id(int activechar_id) {
+		this.activechar_id = activechar_id;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+	public List<Characters> getCharacters() {
+		return characters;
+	}
+
+
+	public void setCharacters(List<Characters> characters) {
+		this.characters = characters;
+	}
+	@OneToMany(mappedBy = "player")
+	private List<Characters> characters;
 	
 		public Player(String first_name, String last_name, String username, String password, int activechar_id) {
 		super();
@@ -40,6 +76,12 @@ public class Player {
 		}
 	
 	
+
+
+	public Player(String username) {
+		super();
+		this.username = username;
+	}
 
 
 	public Player() {
@@ -84,6 +126,16 @@ public class Player {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	
 }

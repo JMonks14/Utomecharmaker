@@ -1,11 +1,13 @@
 package com.tome.main.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tome.main.Enitities.Player;
 import com.tome.main.Exceptions.PlayerNotFoundException;
 import com.tome.main.Repos.PlayerRepo;
+
 
 @Service
 public class PlayerServices {
@@ -13,14 +15,21 @@ public class PlayerServices {
 	@Autowired
 	PlayerRepo repo;
 	
+	@Autowired
+	PasswordEncoder encoder;
+	
 	public PlayerServices(PlayerRepo repo) {
 		super();
 		this.repo=repo;
 	}
 	
+	private boolean emailExists(final String email) {
+        return repo.findByEmail(email).isPresent();
+    }
+	
 	public Player create(Player player) {
-		Player saved = this.repo.save(player);
-		return saved;
+		player.setPassword(encoder.encode(player.getPassword()));
+		return this.repo.save(player);
 	}
 	
 	public Player viewById(int id) {

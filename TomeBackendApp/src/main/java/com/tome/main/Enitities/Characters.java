@@ -1,9 +1,16 @@
 package com.tome.main.Enitities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +24,22 @@ public class Characters {
 	private String race;
 	private String origin;
 	private String char_background;
-	private int fk_player_id;
 	
+	@ManyToOne
+	@JoinColumn(name="fk_player_id")
+	private Player player;
+	
+	@ManyToMany
+	@JoinTable(name="char_skills",
+	joinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
+	inverseJoinColumns = @JoinColumn(name = "fk_skill_id", referencedColumnName="skill_id"))
+	private List<Skill> skills;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="char_spells",
+	joinColumns= @JoinColumn(name="fk_char_id", referencedColumnName="char_id"),
+	inverseJoinColumns = @JoinColumn(name = "fk_spell_id", referencedColumnName="spell_id"))
+	private List<Spell> spells;
 	
 	private boolean alive;
 	@Column(columnDefinition="tinyint default 3")
@@ -36,20 +57,18 @@ public class Characters {
 	
 	private int XP_spent;
 	
-	
-	
 public Characters() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-public Characters(String char_name, String race, String origin, String char_background, int fk_player_id,
+public Characters(String char_name, String race, String origin, String char_background, Player player,
 			boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic, int xP_spent) {
 		super();
 		this.char_name = char_name;
 		this.race = race;
 		this.origin = origin;
 		this.char_background = char_background;
-		this.fk_player_id = fk_player_id;
+		this.player = player;
 		this.alive = alive;
 		HP = hP;
 		MP = mP;
@@ -60,7 +79,7 @@ public Characters(String char_name, String race, String origin, String char_back
 		XP_spent = xP_spent;
 	}
 public Characters(int char_id, String char_name, String race, String origin, String char_background,
-			int fk_player_id, boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic,
+			Player player, boolean alive, int hP, int mP, int aP_basic, int aP_light, int aP_heavy, int aP_magic,
 			int xP_spent) {
 		super();
 		this.char_id = char_id;
@@ -68,7 +87,7 @@ public Characters(int char_id, String char_name, String race, String origin, Str
 		this.race = race;
 		this.origin = origin;
 		this.char_background = char_background;
-		this.fk_player_id = fk_player_id;
+		this.player = player;
 		this.alive = alive;
 		HP = hP;
 		MP = mP;
@@ -78,14 +97,7 @@ public Characters(int char_id, String char_name, String race, String origin, Str
 		AP_magic = aP_magic;
 		XP_spent = xP_spent;
 	}
-//	@ManyToMany
-//	@JoinTable(
-//	name="char_skills",
-//	joinColumns= @JoinColumn(name="fk_char_id"),
-//	inverseJoinColumns= @JoinColumn(name="fk_skill_id"))
-//	Set<Skill> skills;
-	
-	
+
 	
 	public int getChar_id() {
 		return char_id;
@@ -105,14 +117,13 @@ public Characters(int char_id, String char_name, String race, String origin, Str
 	public void setChar_background(String char_background) {
 		this.char_background = char_background;
 	}
-	
-	public int getFk_player_id() {
-		return fk_player_id;
-	}
-	public void setFk_player_id(int fk_player_id) {
-		this.fk_player_id = fk_player_id;
-	}
 
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 	public boolean getAlive() {
 		return alive;
 	}
@@ -175,5 +186,16 @@ public Characters(int char_id, String char_name, String race, String origin, Str
 		this.origin = origin;
 	}
 	
-	
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+	public List<Spell> getSpells() {
+		return spells;
+	}
+	public void setSpells(List<Spell> spells) {
+		this.spells = spells;
+	}
 }
