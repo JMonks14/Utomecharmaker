@@ -80,5 +80,23 @@ public class PlayerServices {
 	public Player findByUsername(String username) {
 		return this.repo.findByUsername(username).orElseThrow(PlayerNotFoundException::new);
 	}
+	
+	public void updateResetPasswordToken(String token, String email) {
+		Player player = repo.findByEmail(email).orElseThrow(PlayerNotFoundException::new);
+		player.setResetPasswordToken(token);
+		repo.save(player);
+	}
+	
+	public Player getByResetToken(String token) {
+		return repo.findByResetPasswordToken(token).orElseThrow(PlayerNotFoundException::new);
+	}
+	
+	public void updatePassword(Player player, String newPassword) {
+		String encodedPw = encoder.encode(newPassword);
+		
+		player.setPassword(encodedPw);
+		player.setResetPasswordToken(null);
+		repo.save(player);
+	}
 
 }

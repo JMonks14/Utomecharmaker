@@ -2,6 +2,7 @@ package com.tome.main.Enitities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +23,9 @@ public class Player{
 	private int activechar_id;
 	private String role;
 	private String email;
+	
+	@Column(name = "reset_password_token")
+	private String resetPasswordToken;
 	
 	public int getActivechar_id() {
 		return activechar_id;
@@ -135,6 +139,16 @@ public class Player{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
 	}
 
 	
