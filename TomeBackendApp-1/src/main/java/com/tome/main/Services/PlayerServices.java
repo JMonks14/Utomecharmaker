@@ -56,6 +56,12 @@ public class PlayerServices {
 		return latest;
 	}
 	
+	public boolean passwordCorrect(String password, int pid) {
+		Player player = viewById(pid);
+		if (encoder.matches(password, player.getPassword())) return true;
+		else return false;
+	}
+	
 	public Player update(Player newPlayer, int id) {
 		try {
 			Player player = viewById(id);
@@ -65,8 +71,6 @@ public class PlayerServices {
 		player.setLast_name(newPlayer.getLast_name());
 		if (newPlayer.getUsername()!=null)
 		player.setUsername(newPlayer.getUsername());
-		if (newPlayer.getPassword()!=null)
-		player.setPassword(newPlayer.getPassword());
 		if (newPlayer.getActiveChar()!=0)
 		player.setActiveChar(newPlayer.getActiveChar());
 		Player saved = this.repo.save(player);

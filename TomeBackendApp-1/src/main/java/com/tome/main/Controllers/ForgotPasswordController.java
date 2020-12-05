@@ -9,15 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-
 import com.tome.main.Enitities.Player;
 import com.tome.main.Exceptions.PlayerNotFoundException;
 import com.tome.main.Services.PlayerServices;
@@ -82,15 +78,15 @@ public class ForgotPasswordController {
 	
 	@GetMapping("/reset_password")
 	public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
-		try {
+		if (token == null)
+			return "InvalidToken";
+		try {				
 			Player player = playerService.getByResetToken(token);
 			model.addAttribute("token", token);
 			return "reset_password_form";
 		} catch (PlayerNotFoundException e) {
 			return "InvalidToken";
-		}
-		
-		
+		}	
 	}
 	
 	@PostMapping("/reset_password")
@@ -105,8 +101,7 @@ public class ForgotPasswordController {
 			return "reset_successful";
 		} catch (PlayerNotFoundException e) {
 			return "InvalidToken";
-		}
-		
+		}	
 	}
 	
 	@GetMapping("/test")

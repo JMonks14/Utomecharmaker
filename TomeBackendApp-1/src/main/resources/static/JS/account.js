@@ -13,11 +13,11 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             let username = data.username
             sessionStorage.setItem("Pid",id)
 
-            passwordUpLoad(data)
-
             document.getElementById("idpara").innerHTML+=id;
             document.getElementById("namepara").innerHTML+=name;
             document.getElementById("usernamepara").innerHTML+=username;
+
+            addQuerySelectors(data)
             // console.log("====================");
             // console.log(player);
             // console.log("====================");
@@ -59,7 +59,8 @@ fetch(`http://localhost:8010/player/find/${Username}`)
                     console.log("Request failed", error);
                 })
                 }
-
+function addQuerySelectors(data){
+    let player = data
 //brings up name update form when button clicked
 document.querySelector("#updatenamebutton").addEventListener("click", function(upName) {
     upName.preventDefault();
@@ -74,6 +75,10 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
     <div class="form-group">
       <label for="lastnameupdate">Last Name</label>
       <input type="text" class="form-control" id="lastnameupdate">
+    </div>
+    <div class="form-group">
+      <label for="passwordconfirm">Please confirm your current password to update your account</label>
+      <input type="password" class="form-control" id="passwordconfirm">
     </div>
     <button id="subnamebutton" type="submit" class="btn btn-primary">Submit</button>
     </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
@@ -92,6 +97,7 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
 
         let nfname = n["firstnameupdate"].value;
         let nlname = n["lastnameupdate"].value;
+        let password = n["passwordconfirm"].value;
 
         if(nfname != player.first_name && nfname != "") {
             player.first_name = nfname
@@ -99,28 +105,13 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
         if(nlname !=player.last_name && nlname != "") {
             player.last_name = nlname
         }
-        playernameUp(player)
+
+        playernameUp(player, password)
     })
     
 })
 //function which sends update info
-function playernameUp(data) {
 
-    fetch(`http://localhost:8010/player/update/${sessionStorage.getItem("Pid")}`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    }).then(response => response)
-    .then(function (data) {
-        console.log("Request succeeded with JSON response",data);
-//        location.reload()
-    }).catch(function(error) {
-        console.log("Request failed", error);
-    })
-}
 //brings up username update form when clicked
 document.querySelector("#updateusernamebutton").addEventListener("click", function(upName) {
     upName.preventDefault();
@@ -131,6 +122,10 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
     <div class="form-group">
       <label for="unameupdate">Username</label>
       <input type="text" class="form-control" id="unameupdate">
+    </div>
+    <div class="form-group">
+      <label for="passwordconfirm">Please confirm your current password to update your account</label>
+      <input type="password" class="form-control" id="passwordconfirm">
     </div>
     <button id="subusernamebutton" type="submit" class="btn btn-primary">Submit</button>
     </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
@@ -147,14 +142,16 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
         let n = document.querySelector("#usernameupdate").elements;
 
         let nuname = n["unameupdate"].value;
+        let password = n["passwordconfirm"].value;
 
         if(nuname != player.username && nuname != "") {
             player.username = nuname
         }
-        playernameUp(player)
+        
+        playernameUp(player, password)
         // location.reload()
 })})
-function passwordUpLoad(player) {
+
 //brings up name update form when button clicked
 document.querySelector("#changepasswordbutton").addEventListener("click", function(upName) {
     upName.preventDefault();
@@ -162,8 +159,8 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
 
     let passform = `<form id="passwordupdate">
     <div class="form-group">
-      <label for="oldpassword">Enter Current Password:</label>
-      <input type="password" class="form-control" id="oldpassword">
+      <label for="passwordconfirm">Please confirm your current password to update your account</label>
+      <input type="password" class="form-control" id="passwordconfirm">
     </div>
     <div class="form-group">
       <label for="newpassord">New Password:</label>
@@ -187,28 +184,77 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
         e.preventDefault();
         let p = document.querySelector("#passwordupdate").elements;
 
-        let oldpass = p["oldpassword"].value;
+        let oldpass = p["passwordconfirm"].value;
         let newpass = p["newpassword"].value;
         let newpasscon = p["newpasswordcon"].value;
 
-        if (oldpass != player.password) {
-            window.alert("Update failed: Current password incorrect")
-        } else if (newpass != newpasscon) {
+         if (newpass != newpasscon) {
             window.alert("Update failed: New passwords do not match")
         } else if (newpass === "") {
             window.alert("Update failed: New password must contain characters")
         } else {
             player.password = newpass
-            playernameUp(player)
-            window.alert("Password update successful.")
-            location.reload()
+            passwordUp(player, oldpass)
         }
-        
-    
     })
-    
 })
-}
+
+function playernameUp(data, passcheck) {
+    let csrfToken = $("meta[name='_csrf']").attr("content")
+
+    fetch(`http://localhost:8010/player/update/${sessionStorage.getItem("Pid")}`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken,
+            "passcheck": passcheck
+        },
+        body: JSON.stringify(data)
+    }).then((response) => {
+        if (response.status==202) {
+            window.alert("Account update successful")
+            location.reload()
+        } else if(response.status == 401) {
+            window.alert("Unable to update account as the current password you entered was incorrect")
+        }}
+    )
+    .then(function (data) {
+        console.log("Request succeeded with JSON response",data);
+//        location.reload()
+    }).catch(function(error) {
+        console.log("Request failed", error);
+    })}}
+
+function passwordUp(data, passcheck) {
+    let csrfToken = $("meta[name='_csrf']").attr("content")
+
+    fetch(`http://localhost:8010/player/updatePassword/${sessionStorage.getItem("Pid")}`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken,
+            "passcheck": passcheck
+        },
+        body: JSON.stringify(data)
+    }).then((response) => {
+        if (response.status==202) {
+            window.alert("Account update successful")
+            location.reload()
+        } else if(response.status == 401) {
+            window.alert("Unable to update account as the current password you entered was incorrect")
+        }}
+    )
+    .then(function (data) {
+        console.log("Request succeeded with JSON response",data);
+//        location.reload()
+    }).catch(function(error) {
+        console.log("Request failed", error);
+ })}
+
+
+
 fetch(`http://localhost:8010/player/current`)
 .then(
     function(response) {
