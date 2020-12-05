@@ -106,7 +106,7 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
 //function which sends update info
 function playernameUp(data) {
 
-    fetch(`http://localhost:8010/player/update/255`, {
+    fetch(`http://localhost:8010/player/update/${sessionStorage.getItem("Pid")}`, {
         method: "POST",
         mode: "cors",
         headers: {
