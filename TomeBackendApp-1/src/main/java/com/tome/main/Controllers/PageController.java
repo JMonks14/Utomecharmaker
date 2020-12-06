@@ -40,6 +40,11 @@ public class PageController {
 		return "spendXP";
 	}
 	
+	@RequestMapping(value = "/admin") 
+	public String admin() {
+		return "Admin";
+	}
+	
 	
 
 }

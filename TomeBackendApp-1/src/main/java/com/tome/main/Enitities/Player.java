@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="players")
 public class Player{
@@ -46,7 +48,7 @@ public class Player{
 		this.role = role;
 	}
 
-
+	
 	public List<Characters> getCharacters() {
 		return characters;
 	}
@@ -55,6 +57,7 @@ public class Player{
 	public void setCharacters(List<Characters> characters) {
 		this.characters = characters;
 	}
+	@JsonIgnore
 	@OneToMany(mappedBy = "player")
 	private List<Characters> characters;
 	

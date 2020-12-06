@@ -44,7 +44,7 @@
 
 				<p id="namepara">Your name: </p>
 				<br>
-				<br>
+				
 				<button id="updatenamebutton" type="button" class="btn btn-primary">Update
 					Name</button>
 				<br>
@@ -52,7 +52,7 @@
 				<br> <br>
 				<p id="usernamepara">Your Username: </p>
 				<br>
-				<br>
+				
 				<button id="updateusernamebutton" type="button"
 					class="btn btn-primary">Update Username</button>
 				<br>
@@ -65,9 +65,7 @@
 				<br><br>
 				
 			
-				<form th:action="@{/perform_logout}" method="post">
-					<button id="logoutbutton" type="submit" class="btn btn-primary">Logout</button>
-				</form>
+				
 			</div>
 			<div class="col-md">
 				<h5>Current Character:</h5>
@@ -77,6 +75,11 @@
 				<div id="charcbuttspace"></div>
 				<br> <br>
 				<div id="rcharbuttspace"></div>
+				<br><br>
+
+				<form th:action="@{/perform_logout}" method="post">
+					<button id="logoutbutton" type="submit" class="btn btn-primary">Logout</button>
+				</form>
 
 			</div>
 		</div>

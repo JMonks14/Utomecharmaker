@@ -102,5 +102,17 @@ public class PlayerServices {
 		player.setResetPasswordToken(null);
 		repo.save(player);
 	}
+	
+	public String addAdminRole(int id) {
+		Player player = viewById(id);
+		if (player.getRole().contains("ROLE_ADMIN"))
+			return player.getFirst_name() + " " + player.getLast_name() + " is already an admin";
+		else {
+			String newRole = player.getRole() + ",ROLE_ADMIN";
+			player.setRole(newRole);
+			repo.save(player);
+			return player.getFirst_name() + " " + player.getLast_name() + " is now an admin";
+		}
+	}
 
 }

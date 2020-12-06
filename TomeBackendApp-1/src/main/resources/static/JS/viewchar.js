@@ -10,7 +10,7 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                      return;
                      }
                      response.json().then(function(data) {
-                         console.log(data);
+                        //  console.log(data);
                         let name = data.char_name
                         document.getElementById("namespace").innerHTML+=name;
                         let bg = data.char_background
@@ -44,7 +44,7 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                                 "description": data.skills[i].description
                             })                
                         }
-                        console.log(skillsArr);
+                        // console.log(skillsArr);
                         for (x=0;x<skillsArr.length;x++) {
                         for (y=parseInt(x+1); y<skillsArr.length; y++) {
                     
@@ -95,7 +95,7 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                             return;
                             }
                             response.json().then(function(maxxp) {
-                                console.log(maxxp);
+                                // console.log(maxxp);
                                 let xp_left = maxxp-data.xp_spent
                                 if (xp_left ===0) {
                                     document.getElementById("buyskillbutton").remove()

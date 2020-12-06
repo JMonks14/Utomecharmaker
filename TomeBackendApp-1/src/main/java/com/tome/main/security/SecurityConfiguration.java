@@ -29,13 +29,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+//uncomment .csrf().disable() to test APIs with Postman 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
 //        	.csrf().disable()      	
         	.authorizeRequests()
-//          .antMatchers("/admin").hasRole("ADMIN")
+        	.antMatchers("/admin").hasRole("ADMIN")
         	.antMatchers("/accounthome").hasAnyRole("ADMIN","USER")
         	.antMatchers("/viewchar").hasAnyRole("ADMIN","USER")
         	.antMatchers("/CreateChar").hasAnyRole("ADMIN","USER")

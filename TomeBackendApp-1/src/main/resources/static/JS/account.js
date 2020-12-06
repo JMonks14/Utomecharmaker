@@ -7,7 +7,7 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             return;
         }
         response.json().then(function(data) {
-            console.log(data);
+            // console.log(data);
             let id = data.player_id
             let name = data.first_name + " " + data.last_name
             let username = data.username
@@ -44,7 +44,7 @@ fetch(`http://localhost:8010/player/find/${Username}`)
                      sessionStorage.setItem("Cid", Cid)
 
             
-                    console.log(name);            
+                    // console.log(name);            
                     document.getElementById("charnamespace").innerHTML+=name;
                     document.getElementById("charcbuttspace").innerHTML+=`<button id="viewcharbutton" type="button" class="btn btn-primary">View Character</button>`;
                     // document.getElementById("rcharbuttspace").innerHTML+=`<button id="retirecharbutton" type="button" class="btn btn-primary">Retire Character</button>`;
@@ -66,6 +66,8 @@ document.querySelector("#updatenamebutton").addEventListener("click", function(u
     upName.preventDefault();
     document.getElementById("updatenamebutton").remove();
     document.getElementById("namepara").remove();
+    document.getElementById("changepasswordbutton").remove();
+    document.getElementById("updateusernamebutton").remove()
 
     let nameform = `<form id="nameupdate">
     <div class="form-group">
@@ -117,7 +119,9 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
     upName.preventDefault();
     document.getElementById("updateusernamebutton").remove();
     document.getElementById("usernamepara").remove();
-
+    document.getElementById("updatenamebutton").remove()
+    document.getElementById("changepasswordbutton").remove();
+    
     let usernameform = `<br><form id="usernameupdate">
     <div class="form-group">
       <label for="unameupdate">Username</label>
@@ -129,7 +133,7 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
     </div>
     <button id="subusernamebutton" type="submit" class="btn btn-primary">Submit</button>
     </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
-
+    
     document.getElementById("usernameformspace").innerHTML+=usernameform;
 
     document.querySelector("#cancel").addEventListener("click", (c) => {
@@ -156,7 +160,8 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
 document.querySelector("#changepasswordbutton").addEventListener("click", function(upName) {
     upName.preventDefault();
     document.getElementById("changepasswordbutton").remove();
-
+    document.getElementById("updatenamebutton").remove()
+    document.getElementById("updateusernamebutton").remove()
     let passform = `<form id="passwordupdate">
     <div class="form-group">
       <label for="passwordconfirm">Please confirm your current password to update your account</label>
@@ -174,6 +179,7 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
     </form> <br> <button id="cancel" class="btn btn-primary">Cancel</button>`
     
     document.getElementById("passformspace").innerHTML+=passform;
+    
     document.querySelector("#cancel").addEventListener("click", (c) => {
         c.preventDefault()
         location.reload()
@@ -215,10 +221,12 @@ function playernameUp(data, passcheck) {
         if (response.status==202) {
             window.alert("Account update successful")
             location.reload()
-        } else if(response.status == 401) {
+        } else if (response.status == 401) {
             window.alert("Unable to update account as the current password you entered was incorrect")
-        }}
-    )
+        } else if (response.status = 500) {
+            window.alert("The username you entered cannot be chosen as it is already in use")
+        }
+    })
     .then(function (data) {
         console.log("Request succeeded with JSON response",data);
 //        location.reload()

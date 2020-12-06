@@ -88,5 +88,11 @@ public class PlayerController {
 			return new ResponseEntity<>(newPlayer, HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
+	@PostMapping("/make_admin/{id}")
+	public ResponseEntity<String> makeAdmin(@PathVariable int id) {
+		String result = service.addAdminRole(id);
+		return new ResponseEntity<>(result, HttpStatus.OK); 
+	}
 
 }

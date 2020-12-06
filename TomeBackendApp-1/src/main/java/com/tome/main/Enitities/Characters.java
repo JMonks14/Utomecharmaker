@@ -27,7 +27,7 @@ public class Characters {
 	private String origin;
 	private String char_background;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="fk_player_id")
 	private Player player;

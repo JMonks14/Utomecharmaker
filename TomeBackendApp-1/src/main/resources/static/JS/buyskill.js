@@ -66,7 +66,7 @@ fetch(`http://localhost:8010/skills/listbytree/${tree_id}`)
           <div id ="chooseskill" class="dropdown-menu" aria-labelledby="dropdownMenu2"></div>`  
           // Examine the text in the response
           response.json().then(function(data) {
-            console.log(data);
+            // console.log(data);
             getCharSkills(data)});
         }
       )
@@ -92,7 +92,7 @@ function getCharSkills(inskills) {
             
           for (let x=0; x < char_skills.length; x++){
             let char_skillId=char_skills[x].skill_id
-            console.log(char_skillId);
+            // console.log(char_skillId);
             char_skillIds.push(char_skillId)
           }
           console.log(char_skillIds);
@@ -182,12 +182,12 @@ function getCharSpells(inspells) {
           response.json().then(function(data) {
             // console.log(data);
             let char_spells=[]                      
-            console.log(data);
+            // console.log(data);
             let charSpells=data.spells
                       
           for (let x=0; x < charSpells.length; x++){
             let char_spell=charSpells[x].spell_id
-            console.log(char_spell);
+            // console.log(char_spell);
             char_spells.push(char_spell)
           }
           console.log(char_spells);
@@ -251,7 +251,7 @@ function buySkill(skill) {
               response.json().then(function(data) {
                 let char = data
                 char.skills.push(skill);
-                console.log(char);
+                // console.log(char);
                 let APL2=[9,12]
                 let APL4=6
                 let APH2=[10,13]
@@ -269,7 +269,7 @@ function buySkill(skill) {
                 if (MP1.includes(n)) char.mp+=1;
                 if (MP3===n) char.mp+=3;
                 if (APM2.includes(n)) char.ap_magic+=2;
-                console.log((char));
+                // console.log((char));
                 updateChar(char)
                 // console.log(data);                               
               })}).catch(function(error) {
@@ -302,7 +302,7 @@ function buySpell(spell) {
             response.json().then(function(data){
               let mass =data
               char.spells.push(mass)
-              console.log(char);
+              // console.log(char);
               buyCantrips(char)
             }).catch(function(err) {
               console.log('Fetch Error :-S', err);
