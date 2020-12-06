@@ -118,10 +118,14 @@ document.querySelector("#retirecharbutton").addEventListener("click", function(r
     let conf = window.confirm("Your character will be considered dead and you will no longer be able to play them. Please click ok to confirm if you wish to proceed.")
     if(conf != true) {console.log(conf);}
     else {
+        let csrfToken = $("meta[name='_csrf']").attr("content")
         fetch(`http://localhost:8010/character/kill/${Cid}`, {
         method: "PUT",
-        mode: "cors" }
-        )
+        mode: "cors",
+        headers: {
+            "X-CSRF-TOKEN": csrfToken
+        }
+    })
         .then(response => response)
         .then(function(data) {
             console.log("Request succeeded with JSON response",data);
@@ -152,12 +156,13 @@ function ResetXP(data) {
 }
 function resetChar(char) {
     let newChar = char
-
+    let csrfToken = $("meta[name='_csrf']").attr("content")
     fetch(`http://localhost:8010/character/update/${Cid}`, {
           method: "PUT",
           mode: "cors",
           headers: {
               "Content-Type": "application/json",
+              "X-CSRF-TOKEN": csrfToken
           },
           body: JSON.stringify(newChar)
       }).then(response => response)

@@ -240,6 +240,7 @@ function loadSpell(n) {
     });}
     //calls the character from the database and updates the relevant fields
 function buySkill(skill) {
+  
       let n = skill.skill_id
       fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
           .then(function(response) {
@@ -314,11 +315,13 @@ function buySpell(spell) {
 })}
     //saves character back to database
 function updateChar(char) {
+  let csrfToken = $("meta[name='_csrf']").attr("content")
       fetch(`http://localhost:8010/character/update/${char.char_id}`, {
             method: "PUT",
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken
             },
             body: JSON.stringify(char)
         }).then(response => response)

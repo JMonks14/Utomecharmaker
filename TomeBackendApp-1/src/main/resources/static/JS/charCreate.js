@@ -45,11 +45,13 @@ document.querySelector("#charcreate").addEventListener("submit", function(a) {
 })
 
 function saveChar(data) {
+    let csrfToken = $("meta[name='_csrf']").attr("content")
     fetch("http://localhost:8010/character/create", {
         method: "POST",
         mode: "cors",
         headers: {
             "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken
         },
         body: JSON.stringify(data)
     }).then(response => response)
