@@ -14,5 +14,9 @@ public class HeadrefServices {
 	public int getMaxXp() {
 		return this.repo.getMaxXp();
 	}
+	
+	public void setMaxXP(int number) {
+		this.repo.setMaxXp(number);
+	}
 
 }

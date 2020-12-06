@@ -29,8 +29,16 @@
 			</ul>
 		</div>
 	</nav>
-    <h1>This is the admin page</h1>
-
+	<div class="container">
+	<h1>This is the admin page</h1>
+	<br>
+	<h5>Current max xp:</h5>
+	<p id="maxXPdisp"></p>
+	<div id="setMaxXPSpace">
+		<button id="setmaxXP" class="btn btn-primary">Set Max XP</button>
+	</div>
+	</div>
+	<script th:src="@{/JS/admin.js}" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 			crossorigin="anonymous"></script>

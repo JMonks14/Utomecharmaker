@@ -165,7 +165,8 @@ document.querySelector("#updateusernamebutton").addEventListener("click", functi
         
         playernameUp(player, password)
         // location.reload()
-})})
+    })
+})
 
 //brings up name update form when button clicked
 document.querySelector("#changepasswordbutton").addEventListener("click", function(upName) {
@@ -271,8 +272,6 @@ function passwordUp(data, passcheck) {
     }).catch(function(error) {
         console.log("Request failed", error);
  })}
-
-
 
 fetch(`http://localhost:8010/player/current`)
 .then(
