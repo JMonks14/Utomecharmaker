@@ -7,7 +7,7 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             return;
         }
         response.json().then(function(data) {
-            // console.log(data);
+            console.log(data);
             let id = data.player_id
             let name = data.first_name + " " + data.last_name
             let username = data.username
@@ -16,6 +16,17 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             document.getElementById("idpara").innerHTML+=id;
             document.getElementById("namepara").innerHTML+=name;
             document.getElementById("usernamepara").innerHTML+=username;
+            
+            let role = data.role
+            if (role.indexOf("ROLE_ADMIN") != -1) {
+                document.getElementById("adminbuttspace").innerHTML+=`<button id="adminbutton" type="button" class="btn btn-primary">Admin Console</button>`
+                document.querySelector("#adminbutton").addEventListener("click", function(a) {
+                a.preventDefault()
+                window.location.href="admin"
+                })
+            }
+
+            
 
             addQuerySelectors(data)
             // console.log("====================");
