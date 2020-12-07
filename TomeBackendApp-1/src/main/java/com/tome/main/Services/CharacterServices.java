@@ -1,5 +1,8 @@
 package com.tome.main.Services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +62,14 @@ public class CharacterServices {
 		player.setActiveChar(0);
 		this.playerservice.update(player, player.getPlayer_id());
 		return this.update(dead, id);
+	}
+	
+	public List<Characters> listAlive() {
+		List<Characters> allChars = this.repo.findAll();
+		List<Characters> alive = allChars.stream()
+									.filter(Char -> Char.getAlive()==true)
+									.collect(Collectors.toList());
+		return alive;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.tome.main.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +47,11 @@ public class CharacterController {
 	public ResponseEntity<Characters> update(@RequestBody Characters newChar, @PathVariable int id) {
 		Characters updated = this.service.update(newChar, id);
 		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/list_alive")
+	public List<Characters> listAlive() {
+		return this.service.listAlive();
 	}
 
 }

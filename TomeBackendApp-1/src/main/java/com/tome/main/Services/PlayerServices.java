@@ -1,5 +1,7 @@
 package com.tome.main.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -115,4 +117,19 @@ public class PlayerServices {
 		}
 	}
 
+	public String removeAdminRole(int id) {
+		Player player = viewById(id);
+		if (player.getRole().contains("ROLE_ADMIN")) {
+			player.setRole("ROLE_USER");
+			repo.save(player);
+			return player.getFirst_name() + " " + player.getLast_name() + " is no longer an admin";
+		}
+		else {
+			return player.getFirst_name() + " " + player.getLast_name() + " is not an admin";
+		}
+	}
+	
+	public List<Player> listAll() {
+		return this.repo.findAll();
+	}
 }

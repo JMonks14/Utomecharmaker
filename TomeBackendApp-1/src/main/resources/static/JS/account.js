@@ -7,7 +7,7 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             return;
         }
         response.json().then(function(data) {
-            console.log(data);
+            // console.log(data);
             let id = data.player_id
             let name = data.first_name + " " + data.last_name
             let username = data.username
