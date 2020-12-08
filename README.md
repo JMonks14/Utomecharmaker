@@ -87,7 +87,7 @@ HTML and javascript files, but any files added or edited should be checked in sp
 ### The Database
 
 The application is designed to connect to a MySQL database. This can be hosted on a the local machine or a cloud server. The connection settings can be set in application.properties.
-A database [starter file](starting database.sql) can be found in this repository. This can be imported into an instance of MySQL, which will create a database called 'utome', which contains
+A database starter file can be found in this repository. This can be imported into an instance of MySQL, which will create a database called 'utome', which contains
 fully populated skills and spells tables. The skill and spell tables each contain a 'null'entry with id=0 for foreign key constraint purposes. The skill and spell id values are vital to 
 determine correct prerequisites for skills. Additionally, many Id values are hard-coded into buyskill.js for the purpose of updating character stats. Any design changes to skills and
 spells will need to account for this, and may require editing of the database and/or javascript code to ensure that the application presents up-to-date options.
@@ -109,13 +109,18 @@ The recommended prodecure for adding the first Admin to a fresh database is as f
 
 Alternatively the database can be directly edited, but this is not recommended.
 
-**Built With**
-* [Maven](https://maven.apache.org/) - Dependency Management
-**License**
+## Built With
+
+[Maven](https://maven.apache.org/) - Dependency Management
+
+#### License
 See License.MD
-**Versioning**
-Current Version 1.0.0
-**Author**
+
+#### Versioning
+Current Version 0.0.1
+
+#### Author
 Dr James Monks – Project Developer (https://github.com/JMonks14)
-**Acknowledgements**
+
+#### Acknowledgements
 Vinesh Ghela, Alan Davies and Shafeeq Muhammed have provided valuable assistance with various aspects of this project. 
