@@ -95,8 +95,8 @@ function getCharSkills(inskills) {
             // console.log(char_skillId);
             char_skillIds.push(char_skillId)
           }
-          console.log(char_skillIds);
-          console.log(skills);
+          // console.log(char_skillIds);
+          // console.log(skills);
             for (let i =0; i<skills.length;i++) {
               let skill=skills[i]
               if(skill.prerequisite_1!=0) {
@@ -190,7 +190,7 @@ function getCharSpells(inspells) {
             // console.log(char_spell);
             char_spells.push(char_spell)
           }
-          console.log(char_spells);
+          // console.log(char_spells);
           // console.log(skills);
             for (let i =0; i<spells.length;i++) {
               let spell=spells[i]
