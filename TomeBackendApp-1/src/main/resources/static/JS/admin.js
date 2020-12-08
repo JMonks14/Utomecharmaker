@@ -217,6 +217,46 @@ function charIdSearch(Cid) {
             let alive = ""
             if (data.alive ==true) alive="Alive";
             else alive = "Dead"
+
+            skillsArr=[]         
+            for (i=0; i<data.skills.length; i++) {
+             // console.log(data[i]);
+                skillsArr.push({
+                    "name" : data.skills[i].skill_name,
+                    "times_bought": 1,
+                })                
+            }
+            // console.log(skillsArr);
+            for (x=0;x<skillsArr.length;x++) {
+                for (y=parseInt(x+1); y<skillsArr.length; y++) {
+            
+                if (skillsArr[x].name===skillsArr[y].name) {
+                    skillsArr[x].times_bought+=1
+                    skillsArr.splice(y,1)
+                    y=parseInt(x)
+                    }
+                }
+            }
+
+            let skillstring = ""
+            for (s in skillsArr) {
+                skillstring+=skillsArr[s].name
+                if (skillsArr[s].times_bought > 1) skillstring +=` (${skillsArr[s].times_bought})`;
+                skillstring+=", "
+            }
+            // console.log(skillstring);
+            let skillstrimmed = skillstring.slice(0,-2)
+            // console.log(skillstrimmed);
+
+            let spellstring = ""
+            for (i = 0; i<data.spells.length; i++) {
+                spellstring+= data.spells[i].spell_name
+                spellstring+=", "
+            }
+            // console.log(spellstring);
+            let spellstrimmed = spellstring.slice(0, -2)
+            // console.log(spellstrimmed);
+
             document.getElementById("CidSearchResult").innerHTML=
             `<div class="card">
                 <div class="card-body" id="cardbody">
@@ -224,7 +264,9 @@ function charIdSearch(Cid) {
                     <p class="card-text"><b>HP:</b> ${data.hp}, <b>AP (light):</b> ${data.ap_light}, <b>AP (heavy):</b> ${data.ap_heavy}, <b>AP (Magic):</b> ${data.ap_magic}, <b>MP:</b> ${data.mp}</p>
                     <p class="card-text"><b>CID:</b> ${data.char_id}, <b>Player ID:</b> ${data.player.player_id},          <b>Player Name:</b> ${data.player.first_name} ${data.player.last_name}</p>
                     <p class="card-text"><b>Race:</b> ${data.race},          <b>Origin:</b> ${data.origin}, <b>Status:</b> ${alive}</p>
-                    <p class="card-text">Background:</p>
+                    <p class="card-text"><b>Skills:</b> ${skillstrimmed}</p>
+                    <p class="card-text"><b>Spells:</b> ${spellstrimmed}</p>
+                    <p class="card-text"><b>Background:</b></p>
                     <p class="card-text">${data.char_background}</p>
                 </div>
             </div>`
