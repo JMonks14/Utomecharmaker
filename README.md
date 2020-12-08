@@ -109,7 +109,7 @@ The recommended prodecure for adding the first Admin to a fresh database is as f
 
 Alternatively the database can be directly edited, but this is not recommended.
 
-## Built With
+#### Built With
 
 [Maven](https://maven.apache.org/) - Dependency Management
 
