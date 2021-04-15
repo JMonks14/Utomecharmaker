@@ -275,7 +275,6 @@ function buySkill(skill) {
               })}).catch(function(error) {
                     console.log("Request failed", error);
                 })
-      
     }
     //saves spell as belonging to user's character
 function buySpell(spell) {
