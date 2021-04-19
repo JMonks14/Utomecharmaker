@@ -31,58 +31,23 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
 
                         document.getElementById("stats").innerHTML+=statstring
 
-                        if (data.xp_spent ===0) {
-                            document.getElementById("skillstable").remove()
-                            document.getElementById("msgspace").innerHTML = "You have not yet bought any skills."
-                        }
-                        skillsArr=[]         
-                        for (i=0; i<data.skills.length; i++) {
-                         // console.log(data[i]);
-                            skillsArr.push({
-                                "name" : data.skills[i].skill_name,
-                                "times_bought": 1,
-                                "description": data.skills[i].description
-                            })                
-                        }
-                        // console.log(skillsArr);
-                        for (x=0;x<skillsArr.length;x++) {
-                        for (y=parseInt(x+1); y<skillsArr.length; y++) {
-                    
-                        if (skillsArr[x].name===skillsArr[y].name) {
-                            skillsArr[x].times_bought+=1
-                            skillsArr.splice(y,1)
-                            y=parseInt(x)
-                            }
-                        }
-                        }
-                        for (s in skillsArr) {
-                            document.getElementById("skilltable").innerHTML+=`<th scope="row" class="tabletxt">${skillsArr[s].name}</th>
-                            <td class="tabletxt">${skillsArr[s].times_bought}</td>
-                            <td class="tabletxt">${skillsArr[s].description}</td></tr>`
+                        if (data.spells.length > 0) {
+                            document.getElementById("btn-group").innerHTML=`<button type="button" id="dispskills" class="btn btn-success">View Skills</button>
+                            <button type="button" id="dispspells" class="btn btn-primary">View Spells</button>`
+                            document.getElementById("space").innerHTML="<br>"
+                            
+                            document.querySelector("#dispskills").addEventListener("click", () => {
+                                dispSkills(data)
+                            })
+    
+                            document.querySelector("#dispspells").addEventListener("click", () => {
+                                dispSpells(data)
+                            })
                         }
 
-                        if (data.spells.length > 0) {
-                            document.getElementById("spellshead").innerHTML="Character Spells"
-                            document.getElementById("spelltablespace").innerHTML=`<table id="spellstable" class="table table-striped" width="100%">
-                            <thead>
-                              <tr>
-                                <th scope="col">Spell Name</th>
-                                <th scope="col">Mana Cost</th>
-                                <th scope="col">Range</th>
-                                <th scope="col">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody id="spelltable">
-                              
-                            </tbody>
-                            </table>`
-                        }
-                        for (a=0; a < data.spells.length; a++) {
-                            document.getElementById("spelltable").innerHTML+=`<tr><th scope="row" class="tabletxt">${data.spells[a].spell_name}</th>
-                            <td class="tabletxt">${data.spells[a].mana_cost}</td>
-                            <td class="tabletxt">${data.spells[a].type}</td>
-                            <td class="tabletxt">${data.spells[a].description}</td></tr>`
-                        }
+                        dispSkills(data)
+
+
                         document.querySelector("#resetXPbutton").addEventListener("click", () => {
                             let reset = window.confirm("This will delete all of your character skills and reset your XP. Are you sure you wish to proceed?")
                             if(reset != true) {console.log(reset);}
@@ -177,3 +142,77 @@ function resetChar(char) {
     a.preventDefault
     window.location.href="accounthome"
 })
+
+function dispSkills(data) {
+
+    if (data.spells.length == 0) {
+    document.getElementById("space").innerHTML=""
+    }
+    if (data.xp_spent ===0) {
+        document.getElementById("msgspace").innerHTML = "You have not yet bought any skills."
+    } else {
+        document.getElementById("skilltablespace").innerHTML = `<table id="skillstable" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Skill Name</th>
+                <th scope="col">Times Bought</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody id="skilltable">
+
+        </tbody>
+    </table>`
+    }
+    skillsArr=[]         
+    for (i=0; i<data.skills.length; i++) {
+     // console.log(data[i]);
+        skillsArr.push({
+            "name" : data.skills[i].skill_name,
+            "times_bought": 1,
+            "description": data.skills[i].description
+        })                
+    }
+    // console.log(skillsArr);
+    for (x=0;x<skillsArr.length;x++) {
+    for (y=parseInt(x+1); y<skillsArr.length; y++) {
+
+    if (skillsArr[x].name===skillsArr[y].name) {
+        skillsArr[x].times_bought+=1
+        skillsArr.splice(y,1)
+        y=parseInt(x)
+        }
+    }
+    }
+    for (s in skillsArr) {
+        document.getElementById("skilltable").innerHTML+=`<th scope="row" class="tabletxt">${skillsArr[s].name}</th>
+        <td class="tabletxt">${skillsArr[s].times_bought}</td>
+        <td class="tabletxt">${skillsArr[s].description}</td></tr>`
+    }
+}
+
+function dispSpells(data) {
+    if (data.spells.length > 0) {
+        // document.getElementById("spellshead").innerHTML="Character Spells"
+        document.getElementById("skilltablespace").innerHTML=`<table id="spellstable" class="table table-striped" width="100%">
+        <thead>
+          <tr>
+            <th scope="col">Spell Name</th>
+            <th scope="col">Mana Cost</th>
+            <th scope="col">Range</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody id="spelltable">
+        </tbody>
+        </table>`
+    } else {
+        document.getElementById("msgspace").innerHTML="Your character does not know any spells"
+    }
+    for (a=0; a < data.spells.length; a++) {
+        document.getElementById("spelltable").innerHTML+=`<tr><th scope="row" class="tabletxt">${data.spells[a].spell_name}</th>
+        <td class="tabletxt">${data.spells[a].mana_cost}</td>
+        <td class="tabletxt">${data.spells[a].type}</td>
+        <td class="tabletxt">${data.spells[a].description}</td></tr>`
+    }
+}
