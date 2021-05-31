@@ -25,7 +25,7 @@ document.querySelector("#playerreg").addEventListener("submit",function(e) {
 
 function playerReg(data) {
     let csrfToken = $("meta[name='_csrf']").attr("content")
-    fetch("http://localhost:8010/player/reg", {
+    fetch("https://localhost:8010/player/reg", {
         method: "POST",
         mode: "cors",
         headers: {

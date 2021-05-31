@@ -6,7 +6,6 @@ document.querySelector("#backtocharview").addEventListener("click", (a) => {
   window.location.href="viewchar"
 })
 
-
 document.querySelector("#armourdrop").addEventListener("click", function(a) {
     a.preventDefault()
     //loads tree picture
@@ -42,7 +41,7 @@ document.querySelector("#weapondrop").addEventListener("click", function(a) {
 })
 //loads skills in chosen tree
 function getSkills(tree_id) {
-fetch(`http://localhost:8010/skills/listbytree/${tree_id}`)
+fetch(`https://localhost:8010/skills/listbytree/${tree_id}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -77,7 +76,7 @@ fetch(`http://localhost:8010/skills/listbytree/${tree_id}`)
 //filters skills buy which ones the player's character has available
 function getCharSkills(inskills) {
   let skills=inskills
-    fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
+    fetch(`https://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -116,7 +115,7 @@ function getCharSkills(inskills) {
       }
 //loads information about a skill when a player selects it 
 function loadSkill(n) {
-  fetch(`http://localhost:8010/skills/findbyid/${n}`)
+  fetch(`https://localhost:8010/skills/findbyid/${n}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -151,7 +150,7 @@ function loadSkill(n) {
 
 //retrieves spells from database when user selects cantrips
 function getSpells() { 
-  fetch(`http://localhost:8010/spell/listall`)
+  fetch(`https://localhost:8010/spell/listall`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -172,7 +171,7 @@ function getSpells() {
 //filters spells to display only those available to the player
 function getCharSpells(inspells) {
   let spells=inspells
-    fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
+    fetch(`https://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -209,7 +208,7 @@ function getCharSpells(inspells) {
        });
     }
 function loadSpell(n) {
-  fetch(`http://localhost:8010/spell/find/${n}`)
+  fetch(`https://localhost:8010/spell/find/${n}`)
     .then(function(response) {
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' +
@@ -242,7 +241,7 @@ function loadSpell(n) {
 function buySkill(skill) {
   
       let n = skill.skill_id
-      fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
+      fetch(`https://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
           .then(function(response) {
               if (response.status!==200) {
                   console.log("There was a problem, status code " + response.status);
@@ -279,7 +278,7 @@ function buySkill(skill) {
     //saves spell as belonging to user's character
 function buySpell(spell) {
       
-  fetch(`http://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
+  fetch(`https://localhost:8010/character/view/${sessionStorage.getItem("Cid")}`)
   .then(function(response) {
       if (response.status!==200) {
           console.log("There was a problem, status code " + response.status);
@@ -292,7 +291,7 @@ function buySpell(spell) {
           
         if(n===6 || n ===9) {
           n++
-          fetch(`http://localhost:8010/spell/find/${n}`)
+          fetch(`https://localhost:8010/spell/find/${n}`)
           .then((response) => {
             if (response.status!==200) {
               console.log("There was a problem, status code " + response.status);
@@ -315,7 +314,7 @@ function buySpell(spell) {
     //saves character back to database
 function updateChar(char) {
   let csrfToken = $("meta[name='_csrf']").attr("content")
-      fetch(`http://localhost:8010/character/update/${char.char_id}`, {
+      fetch(`https://localhost:8010/character/update/${char.char_id}`, {
             method: "PUT",
             mode: "cors",
             headers: {
@@ -334,7 +333,7 @@ function updateChar(char) {
     }
 function buyCantrips(char) {
   char.xp_spent++
-  fetch(`http://localhost:8010/skills/findbyid/${31}`)
+  fetch(`https://localhost:8010/skills/findbyid/${31}`)
           .then(function(response) {
               if (response.status !== 200) {
                   console.log('Looks like there was a problem. Status Code: ' +

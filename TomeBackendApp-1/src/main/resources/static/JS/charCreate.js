@@ -4,7 +4,7 @@ if(!(Pid)) window.location.href="login.html";
 document.querySelector("#charcreate").addEventListener("submit", function(a) {
     a.preventDefault()
 
-    fetch(`http://localhost:8010/player/view/${Pid}`)
+    fetch(`https://localhost:8010/player/view/${Pid}`)
     .then(
     function(response) {
         if (response.status!==200) {
@@ -46,7 +46,7 @@ document.querySelector("#charcreate").addEventListener("submit", function(a) {
 
 function saveChar(data) {
     let csrfToken = $("meta[name='_csrf']").attr("content")
-    fetch("http://localhost:8010/character/create", {
+    fetch("https://localhost:8010/character/create", {
         method: "POST",
         mode: "cors",
         headers: {

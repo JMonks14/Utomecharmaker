@@ -1,4 +1,4 @@
-fetch("http://localhost:8010/headrefs/getmaxXP")
+fetch("https://localhost:8010/headrefs/getmaxXP")
     .then(function(response) {
         if (response.status!==200) {
             console.log("There was a problem, status code " + response.status);
@@ -36,7 +36,7 @@ document.querySelector("#setmaxXP").addEventListener("click", (c) => {
         let newXP = n["newMaxXP"].value;
         let csrfToken = $("meta[name='_csrf']").attr("content")
         // console.log(newXP)
-        fetch(`http://localhost:8010/headrefs/setmaxXP/${newXP}`, {
+        fetch(`https://localhost:8010/headrefs/setmaxXP/${newXP}`, {
             method: "PUT",
             mode: "cors",
             headers: {
@@ -60,7 +60,7 @@ document.querySelector("#PidSearch").addEventListener("submit", (s) => {
 })
 
 function playerIdSearch(Pid) {
-    fetch(`http://localhost:8010/player/view/${Pid}`)
+    fetch(`https://localhost:8010/player/view/${Pid}`)
     .then((response) => {
         if (response.status === 404) {
             response.json().then((data) => {
@@ -102,7 +102,7 @@ function makeAdmin(n) {
     let conf = window.confirm("Please confirm that you are awarding admin status to the selected user.")
     if (conf) {
     let csrfToken = $("meta[name='_csrf']").attr("content")
-    fetch(`http://localhost:8010/player/make_admin/${n}`, {
+    fetch(`https://localhost:8010/player/make_admin/${n}`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -127,7 +127,7 @@ function demoteAdmin(n) {
     let conf = window.confirm("Please confirm that you are removing admin status from the selected user.")
     if (conf) {
         let csrfToken = $("meta[name='_csrf']").attr("content")
-        fetch(`http://localhost:8010/player/make_notadmin/${n}`, {
+        fetch(`https://localhost:8010/player/make_notadmin/${n}`, {
             method: "DELETE",
             mode: "cors",
             headers: {
@@ -155,7 +155,7 @@ document.querySelector("#listusers").addEventListener("click", (c) => {
     listAllUsers()
 })
 function listAllUsers(){
-    fetch("http://localhost:8010/player/list_all")
+    fetch("https://localhost:8010/player/list_all")
     .then(function(response) {
         if (response.status!==200) {
             console.log("There was a problem, status code " + response.status);
@@ -200,7 +200,7 @@ document.querySelector("#CidSearch").addEventListener("submit", (s) => {
 })
 
 function charIdSearch(Cid) {
-    fetch(`http://localhost:8010/character/view/${Cid}`)
+    fetch(`https://localhost:8010/character/view/${Cid}`)
     .then((response) => {
         if (response.status === 404) {
             response.json().then((data) => {
@@ -282,7 +282,7 @@ document.querySelector("#listalive").addEventListener("click", (c) => {
     listAliveChars()
 })
 function listAliveChars(){
-    fetch("http://localhost:8010/character/list_alive")
+    fetch("https://localhost:8010/character/list_alive")
     .then(function(response) {
         if (response.status!==200) {
             console.log("There was a problem, status code " + response.status);

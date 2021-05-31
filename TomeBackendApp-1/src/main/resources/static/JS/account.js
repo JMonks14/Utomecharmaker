@@ -1,5 +1,5 @@
 function findbyUsername(Username) {
-fetch(`http://localhost:8010/player/find/${Username}`)
+fetch(`https://localhost:8010/player/find/${Username}`)
 .then(
     function(response) {
         if (response.status!==200) {
@@ -42,7 +42,7 @@ fetch(`http://localhost:8010/player/find/${Username}`)
             })
             } else {
     
-            fetch(`http://localhost:8010/character/view/${data.activeChar}`)
+            fetch(`https://localhost:8010/character/view/${data.activeChar}`)
                .then(
                      function(response) {
                      if (response.status!==200) {
@@ -220,7 +220,7 @@ document.querySelector("#changepasswordbutton").addEventListener("click", functi
 function playernameUp(data, passcheck) {
     let csrfToken = $("meta[name='_csrf']").attr("content")
 
-    fetch(`http://localhost:8010/player/update/${sessionStorage.getItem("Pid")}`, {
+    fetch(`https://localhost:8010/player/update/${sessionStorage.getItem("Pid")}`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -249,7 +249,7 @@ function playernameUp(data, passcheck) {
 function passwordUp(data, passcheck) {
     let csrfToken = $("meta[name='_csrf']").attr("content")
 
-    fetch(`http://localhost:8010/player/updatePassword/${sessionStorage.getItem("Pid")}`, {
+    fetch(`https://localhost:8010/player/updatePassword/${sessionStorage.getItem("Pid")}`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -273,7 +273,7 @@ function passwordUp(data, passcheck) {
         console.log("Request failed", error);
  })}
 
-fetch(`http://localhost:8010/player/current`)
+fetch(`https://localhost:8010/player/current`)
 .then(
     function(response) {
         if (response.status!==200) {

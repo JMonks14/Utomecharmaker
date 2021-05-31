@@ -2,7 +2,7 @@
 // if(!(Pid)) window.location.href="login.html";
 
 let Cid = sessionStorage.getItem("Cid")
-fetch(`http://localhost:8010/character/view/${Cid}`)
+fetch(`https://localhost:8010/character/view/${Cid}`)
                .then(
                      function(response) {
                      if (response.status!==200) {
@@ -53,7 +53,7 @@ fetch(`http://localhost:8010/character/view/${Cid}`)
                             if(reset != true) {console.log(reset);}
                             else {ResetXP(data)}
                         })
-                        fetch("http://localhost:8010/headrefs/getmaxXP")
+                        fetch("https://localhost:8010/headrefs/getmaxXP")
                         .then(function(response) {
                             if (response.status!==200) {
                             console.log("There was a problem, status code " + response.status);
@@ -84,7 +84,7 @@ document.querySelector("#retirecharbutton").addEventListener("click", function(r
     if(conf != true) {console.log(conf);}
     else {
         let csrfToken = $("meta[name='_csrf']").attr("content")
-        fetch(`http://localhost:8010/character/kill/${Cid}`, {
+        fetch(`https://localhost:8010/character/kill/${Cid}`, {
         method: "PUT",
         mode: "cors",
         headers: {
@@ -122,7 +122,7 @@ function ResetXP(data) {
 function resetChar(char) {
     let newChar = char
     let csrfToken = $("meta[name='_csrf']").attr("content")
-    fetch(`http://localhost:8010/character/update/${Cid}`, {
+    fetch(`https://localhost:8010/character/update/${Cid}`, {
           method: "PUT",
           mode: "cors",
           headers: {
