@@ -3,6 +3,7 @@ package com.tome.main.Enitities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,7 +34,20 @@ public class Skill {
 	private int prerequisite_4;
 	private int prerequisite_5;
 	private boolean is_multibuy;
+	@Column(name="plusHP")
+	private int plusHP;
 	
+	@Column(name="plusFP")
+	private int plusFP;
+	
+	@Column(name="plusAPlight")
+	private int plusAPlight;
+	
+	@Column(name="plusAPheavy")
+	private int plusAPheavy;
+	
+	@Column(name="plusAPmagic")
+	private int plusAPmagic;
 	
 	@ManyToMany(mappedBy="skills")
 	@JsonIgnore
@@ -123,6 +137,36 @@ public class Skill {
 	}
 	public void setIs_multibuy(boolean is_multibuy) {
 		this.is_multibuy = is_multibuy;
+	}
+	public int getPlusHP() {
+		return plusHP;
+	}
+	public void setPlusHP(int plusHP) {
+		this.plusHP = plusHP;
+	}
+	public int getPlusFP() {
+		return plusFP;
+	}
+	public void setPlusFP(int plusFP) {
+		this.plusFP = plusFP;
+	}
+	public int getPlusAPlight() {
+		return plusAPlight;
+	}
+	public void setPlusAPlight(int plusAPlight) {
+		this.plusAPlight = plusAPlight;
+	}
+	public int getPlusAPheavy() {
+		return plusAPheavy;
+	}
+	public void setPlusAPheavy(int plusAPheavy) {
+		this.plusAPheavy = plusAPheavy;
+	}
+	public int getPlusAPmagic() {
+		return plusAPmagic;
+	}
+	public void setPlusAPmagic(int plusAPmagic) {
+		this.plusAPmagic = plusAPmagic;
 	}
 	
 	

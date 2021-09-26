@@ -123,7 +123,7 @@ function loadSkill(n) {
             return;
           }
           response.json().then(function(data) {
-            
+            console.log(data)
             document.getElementById("skillnamehead").innerHTML="Skill Name:"
             document.getElementById("skillnamepara").innerHTML= data.skill_name
             document.getElementById("descripheading").innerHTML="Skill Description:"
@@ -250,24 +250,13 @@ function buySkill(skill) {
               response.json().then(function(data) {
                 let char = data
                 char.skills.push(skill);
-                // console.log(char);
-                let APL2=[9,12]
-                let APL4=6
-                let APH2=[10,13]
-                let APH4=7
-                let HP=[15,17,19,21]
-                let MP1=[32,34,35]
-                let MP3=36
-                let APM2=[37,38]
-                char.xp_spent+=1
-                if (APL2.includes(n)) char.ap_light+=2;
-                if (APL4===n) char.ap_light+=4;
-                if (APH2.includes(n)) char.ap_heavy+=2;
-                if (APH4===n) char.ap_heavy+=8;
-                if (HP.includes(n)) char.hp+=1;
-                if (MP1.includes(n)) char.mp+=1;
-                if (MP3===n) char.mp+=3;
-                if (APM2.includes(n)) char.ap_magic+=2;
+                char.hp = char.hp += skill.plusHP
+                char.mp = char.mp += skill.plusFP
+                char.ap_light = char.ap_light += skill.plusAPlight
+                char.ap_heavy = char.ap_heavy += skill.plusAPheavy
+                char.ap_magic = char.ap_magic += skill.plusAPmagic
+                char.xp_spent = char.xp_spent += 1
+                
                 // console.log((char));
                 updateChar(char)
                 // console.log(data);                               
