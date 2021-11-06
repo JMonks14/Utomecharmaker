@@ -32,5 +32,7 @@ public class SkillServices {
 		skill.setSkillchars(bought.getSkillchars());
 		return this.repo.save(skill);
 	}
-	
+	public void delete(Skill skill) {
+		this.repo.delete(skill);
+	}
 }

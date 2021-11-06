@@ -26,8 +26,10 @@ public class Skill {
 	private String skill_name;
 	private String description;
 	
-	
-	private int fk_tree_id;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="fk_tree_id")
+	private SkillTree tree;
 	private int prerequisite_1;
 	private int prerequisite_2;
 	private int prerequisite_3;
@@ -60,13 +62,13 @@ public class Skill {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Skill(int skill_id, String skill_name, String description, int fk_tree_id, int prerequisite_1,
+	public Skill(int skill_id, String skill_name, String description, SkillTree tree, int prerequisite_1,
 		int prerequisite_2, int prerequisite_3, int prerequisite_4, int prerequisite_5, boolean is_multibuy) {
 	super();
 	this.skill_id = skill_id;
 	this.skill_name = skill_name;
 	this.description = description;
-	this.fk_tree_id = fk_tree_id;
+	this.tree = tree;
 	this.prerequisite_1 = prerequisite_1;
 	this.prerequisite_2 = prerequisite_2;
 	this.prerequisite_3 = prerequisite_3;
@@ -90,11 +92,11 @@ public class Skill {
 		this.description = description;
 	}
 	
-	public int getFk_tree_id() {
-		return fk_tree_id;
+	public SkillTree getTree() {
+		return tree;
 	}
-	public void setFk_tree_id(int fk_tree_id) {
-		this.fk_tree_id = fk_tree_id;
+	public void setTree(SkillTree tree) {
+		this.tree = tree;
 	}
 	public List<Characters> getSkillchars() {
 		return skillchars;

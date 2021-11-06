@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,12 @@ public class SkillController {
 	public ResponseEntity<Skill> buy(@RequestBody Skill skill) {
 		Skill upSkill = service.buy(skill);
 		return new ResponseEntity<>(upSkill, HttpStatus.ACCEPTED);
+	}
+	
+	@DeleteMapping(value="/delete")
+	public ResponseEntity<String> delete(@RequestBody Skill skill) {
+		this.service.delete(skill);
+		return new ResponseEntity<>("Skill Deleted", HttpStatus.ACCEPTED);
 	}
 	
 //	@GetMapping(value="/findbychar/{id}")
